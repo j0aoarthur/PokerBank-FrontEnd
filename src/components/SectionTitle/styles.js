@@ -9,7 +9,6 @@ export const SectionTitleWrapper = styled.div`
     & > h2 {
         color: var(--text-black-color);
         leading-trim: both;
-        text-edge: cap;
         font-size: 18px;
         font-weight: 700;
     }
@@ -17,7 +16,6 @@ export const SectionTitleWrapper = styled.div`
     & > h5 {
         color: var(--text-light-gray-color);
         leading-trim: both;
-        text-edge: cap;
         font-size: 12px;
         font-weight: 400;
         

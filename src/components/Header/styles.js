@@ -23,7 +23,6 @@ export const HeaderProfile = styled.div`
         color: var(--text-gray-color);
         text-align: center;
         leading-trim: both;
-        text-edge: cap;
         font-size: 15px;
         font-style: normal;
         font-weight: 700;
@@ -33,7 +32,6 @@ export const HeaderProfile = styled.div`
         color: var(--text-black-color);
         text-align: center;
         leading-trim: both;
-        text-edge: cap;
         font-size: 25px;
         font-style: normal;
         font-weight: 700;

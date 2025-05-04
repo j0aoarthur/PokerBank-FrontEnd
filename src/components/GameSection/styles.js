@@ -41,7 +41,6 @@ export const GameItemInfo = styled.div`
     & > h3 {
         color: var(--text-black-color);
         leading-trim: both;
-        text-edge: cap;
         font-size: 16px;
         font-weight: 600;
     }
@@ -49,7 +48,6 @@ export const GameItemInfo = styled.div`
     & > p {
         color: var(--text-light-gray-color);
         leading-trim: both;
-        text-edge: cap;
         font-size: 11px;
         font-weight: 400;
     }

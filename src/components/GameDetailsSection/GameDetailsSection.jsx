@@ -1,4 +1,3 @@
-import {SectionTitle} from "../SectionTitle/SectionTitle.jsx";
 import {GameDetailsWrapper, InfoItem, InfoList} from "./styles.js";
 import {formatNumberToBRL} from "../../utils/numberUtils.js";
 
