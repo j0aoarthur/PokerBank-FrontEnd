@@ -11,7 +11,8 @@ import {BottomBar} from "../../components/BottomBar/BottomBar.jsx";
 import {Header} from "../../components/Header/Header.jsx";
 import {
     RankingInfo,
-    RankingItem, RankingList,
+    RankingItem,
+    RankingList,
     RankingNumber,
     RankingText,
     RankingValue

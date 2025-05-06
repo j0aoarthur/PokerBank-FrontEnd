@@ -1,13 +1,13 @@
-import { usePlayerForm } from "./usePlayerForm.js";
-import { PlayerSelectSection } from "../../components/PlayerSelectSection/PlayerSelectSection.jsx";
-import { ChipsSelectSection } from "../../components/ChipsSelectSection/ChipsSelectSection.jsx";
-import { ButtonsContainer, NewPlayerForm, NewPlayerPageContainer } from "./styles.js";
-import { Button } from "../../components/Button/Button.jsx";
-import { Title } from "../../components/Title/Title.jsx";
-import { Header } from "../../components/Header/Header.jsx";
-import { useTitle } from "../../utils/useTitle.js";
-import { addPlayerToGame } from "../../services/apiService.js";
-import { useNavigate } from "react-router-dom";
+import {usePlayerForm} from "./usePlayerForm.js";
+import {PlayerSelectSection} from "../../components/PlayerSelectSection/PlayerSelectSection.jsx";
+import {ChipsSelectSection} from "../../components/ChipsSelectSection/ChipsSelectSection.jsx";
+import {ButtonsContainer, NewPlayerForm, NewPlayerPageContainer} from "./styles.js";
+import {Button} from "../../components/Button/Button.jsx";
+import {Title} from "../../components/Title/Title.jsx";
+import {Header} from "../../components/Header/Header.jsx";
+import {useTitle} from "../../utils/useTitle.js";
+import {addPlayerToGame} from "../../services/apiService.js";
+import {useNavigate} from "react-router-dom";
 
 export function AddPlayerPage({ title }) {
     const { formData, handleInputChange } = usePlayerForm();
