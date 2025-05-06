@@ -3,7 +3,8 @@ import axios from "axios";
 
 
 // Mudar de acordo com sistema de deploy
-const BASE_URL = "https://pokerbank.onrender.com/"
+// Se for localhost, usar o localhost
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 export const axiosInstance = axios.create({
     baseURL: BASE_URL,
