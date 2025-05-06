@@ -2,7 +2,7 @@ import {HeaderLogo, HeaderProfile, HeaderWrapper} from "./styles.js";
 import Logo1 from "../../assets/images/logo1.png";
 import {useNavigate} from "react-router-dom";
 
-export function Header() {
+export function MainHeader() {
     const navigate = useNavigate()
     return (
         <HeaderWrapper>

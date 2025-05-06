@@ -3,19 +3,19 @@ import {useEffect, useState} from "react";
 import Medal1 from "../../assets/images/medal1.png";
 import Medal2 from "../../assets/images/medal2.png";
 import Medal3 from "../../assets/images/medal3.png";
-import {RankingPageContainer} from "./styles.js";
-import {Title} from "../../components/Title/Title.jsx";
+import {FullRankingPageContainer} from "./styles.js";
+import {PageTitle} from "../../components/PageTitle/PageTitle.jsx";
 import {getRanking} from "../../services/apiService.js";
 import {useTitle} from "../../utils/useTitle.js";
-import {BottomBar} from "../../components/BottomBar/BottomBar.jsx";
-import {Header} from "../../components/Header/Header.jsx";
+import {NavigationBar} from "../../components/NavigationBar/NavigationBar.jsx";
+import {MainHeader} from "../../components/MainHeader/MainHeader.jsx";
 import {
-    RankingInfo,
-    RankingItem,
-    RankingList,
-    RankingNumber,
-    RankingText,
-    RankingValue
+    PlayerInfo,
+    PlayerRankingItem,
+    PlayerRankingList,
+    PlayerPosition,
+    PlayerDetails,
+    PlayerNetBalance
 } from "../../components/RankingSection/styles.js";
 import {formatNumberToBRL} from "../../utils/numberUtils.js";
 
@@ -42,28 +42,28 @@ export function RankingPage({title}) {
     };
 
     return (
-        <RankingPageContainer>
-            <Header/>
-            <Title text={"Ranking Completo"}/>
-            <RankingList>
+        <FullRankingPageContainer>
+            <MainHeader/>
+            <PageTitle text={"Ranking Completo"}/>
+            <PlayerRankingList>
                 {ranking.map((player, index) => (
-                    <RankingItem key={player.playerId}>
-                        <RankingInfo>
-                            <RankingNumber>
+                    <PlayerRankingItem key={player.playerId}>
+                        <PlayerInfo>
+                            <PlayerPosition>
                                 {getMedal(index + 1)}
-                            </RankingNumber>
-                            <RankingText>
+                            </PlayerPosition>
+                            <PlayerDetails>
                                 <h3>{player.playerName}</h3>
                                 <p>Partidas jogadas: {player.gamesPlayed}</p>
-                            </RankingText>
-                        </RankingInfo>
-                        <RankingValue style={{ color: player.netBalance >= 0 ? "var(--green-color)" : "var(--red-color)" }}>
+                            </PlayerDetails>
+                        </PlayerInfo>
+                        <PlayerNetBalance style={{ color: player.netBalance >= 0 ? "var(--green-color)" : "var(--red-color)" }}>
                             {formatNumberToBRL(player.netBalance)}
-                        </RankingValue>
-                    </RankingItem>
+                        </PlayerNetBalance>
+                    </PlayerRankingItem>
                 ))}
-            </RankingList>
-            <BottomBar activePage={"ranking"}/>
-        </RankingPageContainer>
+            </PlayerRankingList>
+            <NavigationBar activePage={"ranking"}/>
+        </FullRankingPageContainer>
     );
 }

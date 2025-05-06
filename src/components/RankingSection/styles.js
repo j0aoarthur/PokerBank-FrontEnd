@@ -12,7 +12,7 @@ export const RankingWrapper = styled.div`
 export const RankingSectionTitle = styled.div`
     
 `
-export const RankingList = styled.div`
+export const PlayerRankingList = styled.div`
     display: flex;
     padding: 10px 18px;
     flex-direction: column;
@@ -24,7 +24,7 @@ export const RankingList = styled.div`
     background: var(--white-color);
 `
 
-export const RankingItem = styled.div`
+export const PlayerRankingItem = styled.div`
     display: flex;
     height: fit-content;
     justify-content: space-between;
@@ -33,7 +33,7 @@ export const RankingItem = styled.div`
 
 `
 
-export const RankingInfo = styled.div`
+export const PlayerInfo = styled.div`
     display: flex;
     justify-content: center;
     flex-direction: row;
@@ -41,7 +41,7 @@ export const RankingInfo = styled.div`
     gap: 10px;
 `
 
-export const RankingNumber = styled.div`
+export const PlayerPosition = styled.div`
     display: flex;
     width: 30px;
     height: 30px;
@@ -64,7 +64,7 @@ export const RankingNumber = styled.div`
     
 `
 
-export const RankingText = styled.div`
+export const PlayerDetails = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -85,7 +85,7 @@ export const RankingText = styled.div`
 `
 
 
-export const RankingValue = styled.div`
+export const PlayerNetBalance = styled.div`
     display: flex;
     align-items: center;
     font-size: 12px;

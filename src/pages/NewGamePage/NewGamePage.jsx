@@ -1,10 +1,10 @@
 import {Button} from "../../components/Button/Button.jsx";
 import {DatePicker} from 'antd';
-import {Header} from "../../components/Header/Header.jsx";
-import {Title} from "../../components/Title/Title.jsx";
-import {GameForm, InfoWrapper, NewGamePageWrapper} from "./styles.js";
+import {MainHeader} from "../../components/MainHeader/MainHeader.jsx";
+import {PageTitle} from "../../components/PageTitle/PageTitle.jsx";
+import {CreateGameForm, GameInfoSection, CreateGamePageContainer} from "./styles.js";
 import dayjs from 'dayjs';
-import {BottomBar} from "../../components/BottomBar/BottomBar.jsx";
+import {NavigationBar} from "../../components/NavigationBar/NavigationBar.jsx";
 import {useTitle} from "../../utils/useTitle.js";
 import {addGame} from "../../services/apiService.js";
 import {useState} from "react";
@@ -37,11 +37,11 @@ export function NewGamePage({title}) {
     };
 
     return (
-        <NewGamePageWrapper>
-            <Header/>
-            <InfoWrapper>
-                <Title text={"Nova Partida"}/>
-                <GameForm>
+        <CreateGamePageContainer>
+            <MainHeader/>
+            <GameInfoSection>
+                <PageTitle text={"Nova Partida"}/>
+                <CreateGameForm>
                     <DatePicker
                         style={{ width: '100%' }}
                         size={"large"}
@@ -60,9 +60,9 @@ export function NewGamePage({title}) {
                     >
                         Criar Partida
                     </Button>
-                </GameForm>
-            </InfoWrapper>
-            <BottomBar activePage={"game"}/>
-        </NewGamePageWrapper>
+                </CreateGameForm>
+            </GameInfoSection>
+            <NavigationBar activePage={"game"}/>
+        </CreateGamePageContainer>
     );
 }

@@ -4,7 +4,7 @@ import {GiPokerHand} from "react-icons/gi";
 import {BottomBarContainer, IconWrapper} from "./styles.js";
 import {useNavigate} from "react-router-dom";
 
-export function BottomBar({ activePage }) {
+export function NavigationBar({ activePage }) {
     const navigate = useNavigate();
 
     return (

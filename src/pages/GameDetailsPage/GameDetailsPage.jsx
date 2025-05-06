@@ -1,15 +1,15 @@
-import {Header} from "../../components/Header/Header.jsx";
-import {Title} from "../../components/Title/Title.jsx";
+import {MainHeader} from "../../components/MainHeader/MainHeader.jsx";
+import {PageTitle} from "../../components/PageTitle/PageTitle.jsx";
 import {formatDate, getDayOfWeek} from "../../utils/dateUtils.js";
 import {useEffect, useState} from "react";
 import {useQuery} from "@tanstack/react-query";
 import {getGameDetails} from "../../services/apiService.js";
 import {useParams} from "react-router-dom";
 import {GameDetailsPageWrapper} from "./styles.js";
-import {ParticipantsSection} from "../../components/ParticipantsSection/ParticipantsSection.jsx";
+import {GameParticipantsSection} from "../../components/GameParticipantsSection/GameParticipantsSection.jsx";
 import {GameDetailsSection} from "../../components/GameDetailsSection/GameDetailsSection.jsx";
 import {useTitle} from "../../utils/useTitle.js";
-import {BottomBar} from "../../components/BottomBar/BottomBar.jsx";
+import {NavigationBar} from "../../components/NavigationBar/NavigationBar.jsx";
 
 export function GameDetailsPage({title}) {
     useTitle(title)
@@ -30,11 +30,11 @@ export function GameDetailsPage({title}) {
     return (
         game && (
             <GameDetailsPageWrapper>
-                <Header/>
-                <Title text="Partida" subtitle={`Dia ${formatDate(game.date)} (${getDayOfWeek(game.date)})`}/>
+                <MainHeader/>
+                <PageTitle text="Partida" subtitle={`Dia ${formatDate(game.date)} (${getDayOfWeek(game.date)})`}/>
                 <GameDetailsSection game={game}/>
-                <ParticipantsSection gameId={gameId}/>
-                <BottomBar/>
+                <GameParticipantsSection gameId={gameId}/>
+                <NavigationBar/>
             </GameDetailsPageWrapper>
         )
     )

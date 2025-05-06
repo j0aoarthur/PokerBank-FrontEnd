@@ -3,8 +3,8 @@ import {PlayerSelectSection} from "../../components/PlayerSelectSection/PlayerSe
 import {ChipsSelectSection} from "../../components/ChipsSelectSection/ChipsSelectSection.jsx";
 import {ButtonsContainer, NewPlayerForm, NewPlayerPageContainer} from "./styles.js";
 import {Button} from "../../components/Button/Button.jsx";
-import {Title} from "../../components/Title/Title.jsx";
-import {Header} from "../../components/Header/Header.jsx";
+import {PageTitle} from "../../components/PageTitle/PageTitle.jsx";
+import {MainHeader} from "../../components/MainHeader/MainHeader.jsx";
 import {useTitle} from "../../utils/useTitle.js";
 import {addPlayerToGame} from "../../services/apiService.js";
 import {useNavigate} from "react-router-dom";
@@ -29,9 +29,9 @@ export function AddPlayerPage({ title }) {
 
     return (
         <NewPlayerPageContainer>
-            <Header />
+            <MainHeader />
             <NewPlayerForm>
-                <Title text={"Adicionar Jogador"} />
+                <PageTitle text={"Adicionar Jogador"} />
                 <PlayerSelectSection onChange={handleInputChange} />
                 <ChipsSelectSection onChange={handleInputChange} />
                 <ButtonsContainer>

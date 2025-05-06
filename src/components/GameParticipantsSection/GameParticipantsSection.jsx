@@ -1,13 +1,13 @@
 import {SectionTitle} from "../SectionTitle/SectionTitle.jsx";
 import {FaAngleRight} from "react-icons/fa6";
-import {InfoContainer, InfoWrapper, ParticipantItem, ParticipantsList, ParticipantsWrapper} from "./styles.js";
+import {InfoContainer, InfoWrapper, ParticipantItem, ParticipantsList, ParticipantsSectionContainer} from "./styles.js";
 import {LuCircleMinus, LuCirclePlus} from "react-icons/lu";
 import {useEffect, useState} from "react";
 import {useQuery} from "@tanstack/react-query";
 import {getPlayersOfGame} from "../../services/apiService.js";
 import {formatNumberToBRL} from "../../utils/numberUtils.js";
 
-export function ParticipantsSection({gameId}) {
+export function GameParticipantsSection({gameId}) {
     const [participants, setParticipants] = useState([]);
 
     const {data} = useQuery({
@@ -23,7 +23,7 @@ export function ParticipantsSection({gameId}) {
 
 
     return (
-        <ParticipantsWrapper>
+        <ParticipantsSectionContainer>
             <SectionTitle title={"Jogadores"} subtitle={"Adicionar jogador"} subtitleTo={`/game/${gameId}/player`}/>
             <ParticipantsList>
                 {participants.map((participant) => (
@@ -45,6 +45,6 @@ export function ParticipantsSection({gameId}) {
                 ))}
 
             </ParticipantsList>
-        </ParticipantsWrapper>
+        </ParticipantsSectionContainer>
     )
 }

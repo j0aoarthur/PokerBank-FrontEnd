@@ -1,10 +1,10 @@
 import {
-    RankingInfo,
-    RankingItem,
-    RankingList,
-    RankingNumber,
-    RankingText,
-    RankingValue,
+    PlayerInfo,
+    PlayerRankingItem,
+    PlayerRankingList,
+    PlayerPosition,
+    PlayerDetails,
+    PlayerNetBalance,
     RankingWrapper
 } from "./styles.js";
 import Medal1 from "../../assets/images/Medal1.png";
@@ -41,24 +41,24 @@ export function RankingSection() {
     return (
         <RankingWrapper>
             <SectionTitle title={"Ranking"} subtitle={"Ver todos"} subtitleTo={"/ranking"}/>
-            <RankingList>
+            <PlayerRankingList>
                 {ranking.map((player, index) => (
-                    <RankingItem key={player.playerId}>
-                        <RankingInfo>
-                            <RankingNumber>
+                    <PlayerRankingItem key={player.playerId}>
+                        <PlayerInfo>
+                            <PlayerPosition>
                                 {getMedal(index + 1)}
-                            </RankingNumber>
-                            <RankingText>
+                            </PlayerPosition>
+                            <PlayerDetails>
                                 <h3>{player.playerName}</h3>
                                 <p>Partidas jogadas: {player.gamesPlayed}</p>
-                            </RankingText>
-                        </RankingInfo>
-                        <RankingValue style={{ color: player.netBalance >= 0 ? "var(--green-color)" : "var(--red-color)" }}>
+                            </PlayerDetails>
+                        </PlayerInfo>
+                        <PlayerNetBalance style={{ color: player.netBalance >= 0 ? "var(--green-color)" : "var(--red-color)" }}>
                             {formatNumberToBRL(player.netBalance)}
-                        </RankingValue>
-                    </RankingItem>
+                        </PlayerNetBalance>
+                    </PlayerRankingItem>
                 ))}
-            </RankingList>
+            </PlayerRankingList>
         </RankingWrapper>
     );
 }

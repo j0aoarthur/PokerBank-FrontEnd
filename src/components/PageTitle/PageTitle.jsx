@@ -1,6 +1,6 @@
 import {SubtitleWrapper, TitleWrapper, Wrapper} from "./styles.js";
 
-export function Title({text, subtitle}) {
+export function PageTitle({text, subtitle}) {
     return (
         <Wrapper>
             <TitleWrapper>

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const RankingPageContainer = styled.div`
+export const FullRankingPageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;  
