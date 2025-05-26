@@ -10,6 +10,7 @@ import {GameParticipantsSection} from "../../components/GameParticipantsSection/
 import {GameDetailsSection} from "../../components/GameDetailsSection/GameDetailsSection.jsx";
 import {useTitle} from "../../utils/useTitle.js";
 import {NavigationBar} from "../../components/NavigationBar/NavigationBar.jsx";
+import {PaymentSuggestionSection} from "../../components/PaymentSuggestionSection/PaymentSuggestionSection.jsx";
 
 export function GameDetailsPage({title}) {
     useTitle(title)
@@ -34,6 +35,7 @@ export function GameDetailsPage({title}) {
                 <PageTitle text="Partida" subtitle={`Dia ${formatDate(game.date)} (${getDayOfWeek(game.date)})`}/>
                 <GameDetailsSection game={game}/>
                 <GameParticipantsSection gameId={gameId}/>
+                <PaymentSuggestionSection gameId={gameId}/>
                 <NavigationBar/>
             </GameDetailsPageWrapper>
         )

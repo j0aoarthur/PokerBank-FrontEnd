@@ -54,3 +54,8 @@ export const getPlayersNotInGame = async (gameId) => {
     const response = await axiosInstance.get(`/players/not-in-game/${gameId}`)
     return response.data
 }
+
+export const getPaymentSuggestion = async (gameId) => {
+    const response = await axiosInstance.get(`/games/${gameId}/payment-suggestion`)
+    return response.data
+}
