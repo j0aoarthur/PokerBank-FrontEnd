@@ -9,9 +9,7 @@ export const RankingWrapper = styled.div`
     width: 100%;
     
 `
-export const RankingSectionTitle = styled.div`
-    
-`
+
 export const PlayerRankingList = styled.div`
     display: flex;
     padding: 10px 18px;

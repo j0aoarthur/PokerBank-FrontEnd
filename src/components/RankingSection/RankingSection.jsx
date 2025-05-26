@@ -1,10 +1,10 @@
 import {
+    PlayerDetails,
     PlayerInfo,
+    PlayerNetBalance,
+    PlayerPosition,
     PlayerRankingItem,
     PlayerRankingList,
-    PlayerPosition,
-    PlayerDetails,
-    PlayerNetBalance,
     RankingWrapper
 } from "./styles.js";
 import Medal1 from "../../assets/images/Medal1.png";

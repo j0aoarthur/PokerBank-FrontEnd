@@ -2,7 +2,7 @@ import {Button} from "../../components/Button/Button.jsx";
 import {DatePicker} from 'antd';
 import {MainHeader} from "../../components/MainHeader/MainHeader.jsx";
 import {PageTitle} from "../../components/PageTitle/PageTitle.jsx";
-import {CreateGameForm, GameInfoSection, CreateGamePageContainer} from "./styles.js";
+import {CreateGameForm, CreateGamePageContainer, GameInfoSection} from "./styles.js";
 import dayjs from 'dayjs';
 import {NavigationBar} from "../../components/NavigationBar/NavigationBar.jsx";
 import {useTitle} from "../../utils/useTitle.js";

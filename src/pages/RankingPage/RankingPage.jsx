@@ -10,12 +10,12 @@ import {useTitle} from "../../utils/useTitle.js";
 import {NavigationBar} from "../../components/NavigationBar/NavigationBar.jsx";
 import {MainHeader} from "../../components/MainHeader/MainHeader.jsx";
 import {
-    PlayerInfo,
-    PlayerRankingItem,
-    PlayerRankingList,
-    PlayerPosition,
     PlayerDetails,
-    PlayerNetBalance
+    PlayerInfo,
+    PlayerNetBalance,
+    PlayerPosition,
+    PlayerRankingItem,
+    PlayerRankingList
 } from "../../components/RankingSection/styles.js";
 import {formatNumberToBRL} from "../../utils/numberUtils.js";
 

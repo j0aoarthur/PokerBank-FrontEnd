@@ -41,7 +41,7 @@ export function AddPlayerPage({ title }) {
                         Adicionar Jogador
                     </Button>
                     <Button
-                        onClick={handleSubmit}
+                        onClick={() => handleSubmit(false)}
                     >
                         Adicionar Novo Jogador
                     </Button>
