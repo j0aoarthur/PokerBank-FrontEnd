@@ -59,3 +59,19 @@ export const getPaymentSuggestion = async (gameId) => {
     const response = await axiosInstance.get(`/games/${gameId}/payment-suggestion`)
     return response.data
 }
+
+export const createPlayer = async (playerData) => {
+    const response = await axiosInstance.post("/players", playerData);
+    return response.data;
+}
+
+export const addChip = async (chipData) => {
+    const response = await axiosInstance.post("/chips", chipData);
+    return response.data;
+}
+
+
+export const getChips = async () => {
+    const response = await axiosInstance.get("/chips");
+    return response.data;
+}
