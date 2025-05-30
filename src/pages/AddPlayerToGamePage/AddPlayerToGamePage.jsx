@@ -6,44 +6,30 @@ import {Button} from "../../components/Button/Button.jsx";
 import {PageTitle} from "../../components/PageTitle/PageTitle.jsx";
 import {MainHeader} from "../../components/MainHeader/MainHeader.jsx";
 import {useTitle} from "../../utils/useTitle.js";
-import {addPlayerToGame} from "../../services/apiService.js";
-import {useNavigate} from "react-router-dom";
 
-export function AddPlayerPage({ title }) {
-    const { formData, handleInputChange } = usePlayerForm();
-    const navigate = useNavigate();
+export function AddPlayerToGamePage({ title }) {
+    const { formData, handleInputChange, handleSubmit, isAddingPlayer } = usePlayerForm();
     useTitle(title);
-
-    const handleSubmit = async (redirect = false) => {
-        try {
-            await addPlayerToGame(formData);
-            if (redirect) {
-                navigate(`/game/${formData.gameId}`);
-            } else {
-                window.location.reload();
-            }
-        } catch (error) {
-            console.error("Erro ao adicionar jogador:", error);
-        }
-    };
 
     return (
         <NewPlayerPageContainer>
             <MainHeader />
             <NewPlayerForm>
                 <PageTitle text={"Adicionar Jogador"} />
-                <PlayerSelectSection onChange={handleInputChange} />
-                <ChipsSelectSection onChange={handleInputChange} />
+                <PlayerSelectSection onChange={handleInputChange} playerId={formData.playerId} initialCash={formData.initialCash} />
+                <ChipsSelectSection onChange={handleInputChange} chipsData={formData.chips}/>
                 <ButtonsContainer>
                     <Button
                         onClick={() => handleSubmit(true)}
+                        disabled={isAddingPlayer}
                     >
-                        Adicionar Jogador
+                        {isAddingPlayer ? "Adicionando..." : "Finalizar e Ver Partida"}
                     </Button>
                     <Button
                         onClick={() => handleSubmit(false)}
+                        disabled={isAddingPlayer}
                     >
-                        Adicionar Novo Jogador
+                        {isAddingPlayer ? "Adicionando..." : "Adicionar Outro Jogador"}
                     </Button>
                 </ButtonsContainer>
             </NewPlayerForm>

@@ -1,31 +1,26 @@
 import {NumberInput} from "../NumberInput/NumberInput.jsx";
 import {ChipSelect, ChipsSection, SectionWrapper} from "./styles.js";
+import {getChips} from "../../services/apiService.js";
+import {useQuery} from "@tanstack/react-query";
+import capitalize from "antd/es/_util/capitalize.js";
 
 export function ChipsSelectSection({onChange}) {
+
+    const { data: chips = [] } = useQuery({
+        queryKey: ['chips'],
+        queryFn: getChips
+    });
+
     return (
         <SectionWrapper>
             <h2>Fichas</h2>
             <ChipsSection>
-                <ChipSelect>
-                    <h3>Pretas</h3>
-                    <NumberInput onChange={(value) => onChange(1, value)} />
-                </ChipSelect>
-                <ChipSelect>
-                    <h3>Verdes</h3>
-                    <NumberInput onChange={(value) => onChange(2, value)} />
-                </ChipSelect>
-                <ChipSelect>
-                    <h3>Azuis</h3>
-                    <NumberInput onChange={(value) => onChange(3, value)} />
-                </ChipSelect>
-                <ChipSelect>
-                    <h3>Amarelas</h3>
-                    <NumberInput onChange={(value) => onChange(4, value)} />
-                </ChipSelect>
-                <ChipSelect>
-                    <h3>Vermelhas</h3>
-                    <NumberInput onChange={(value) => onChange(5, value)} />
-                </ChipSelect>
+                {chips.map(chip => (
+                    <ChipSelect key={chip.id}>
+                        <h3>{capitalize(chip.color)}</h3>
+                        <NumberInput onChange={(value) => onChange(chip.id, value)} />
+                    </ChipSelect>
+                ))}
             </ChipsSection>
         </SectionWrapper>
     )

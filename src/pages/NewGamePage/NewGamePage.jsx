@@ -24,7 +24,6 @@ export function NewGamePage({title}) {
         const gameData = { date: selectedDate.format("YYYY-MM-DD") };
         try {
             const response = await addGame(gameData);
-            console.log("Partida criada com sucesso", response);
 
             if (redirectToPlayers) {
                 navigate(`/game/${response.id}/player`);
@@ -32,6 +31,7 @@ export function NewGamePage({title}) {
                 navigate(`/game/${response.id}`);
             }
         } catch (error) {
+            alert("Erro ao criar partida. Por favor, tente novamente.");
             console.error("Erro ao criar partida:", error);
         }
     };
