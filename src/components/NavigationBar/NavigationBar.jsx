@@ -3,6 +3,7 @@ import {PiRanking} from "react-icons/pi";
 import {GiPokerHand} from "react-icons/gi";
 import {BottomBarContainer, IconWrapper} from "./styles.js";
 import {useNavigate} from "react-router-dom";
+import {RiAdminLine} from "react-icons/ri";
 
 export function NavigationBar({ activePage }) {
     const navigate = useNavigate();
@@ -17,6 +18,9 @@ export function NavigationBar({ activePage }) {
             </IconWrapper>
             <IconWrapper $active={activePage === 'ranking'} onClick={() => navigate("/ranking")}>
                 <PiRanking />
+            </IconWrapper>
+            <IconWrapper $active={activePage === 'admin'} onClick={() => navigate("/admin")}>
+                <RiAdminLine />
             </IconWrapper>
             <IconWrapper $active={activePage === 'logout'} onClick={() => navigate("/")}>
                 <FiLogOut />
