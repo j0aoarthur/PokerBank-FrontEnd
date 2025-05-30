@@ -6,9 +6,10 @@ import {createHashRouter, RouterProvider} from "react-router-dom";
 import {Container} from "./components/Container/Container.jsx";
 import {HomePage} from "./pages/HomePage/HomePage.jsx";
 import {NewGamePage} from "./pages/NewGamePage/NewGamePage.jsx";
-import {AddPlayerPage} from "./pages/AddPlayerPage/AddPlayerPage.jsx";
+import {AddPlayerToGamePage} from "./pages/AddPlayerToGamePage/AddPlayerToGamePage.jsx";
 import {GameDetailsPage} from "./pages/GameDetailsPage/GameDetailsPage.jsx";
 import {RankingPage} from "./pages/RankingPage/RankingPage.jsx";
+import {AdminPage} from "./pages/AdminPage/AdminPage.jsx";
 
 const router = createHashRouter([
     {
@@ -33,13 +34,16 @@ const router = createHashRouter([
                     },
                     {
                         path:"/game/:gameId/player",
-                        element: <AddPlayerPage title={"Adicionar Jogador"}/>,
+                        element: <AddPlayerToGamePage title={"Adicionar Jogador"}/>,
                     },
                     {
                         path:"/ranking",
                         element: <RankingPage title={"Ranking"}/>,
                     },
-
+                    {
+                        path:"/admin",
+                        element: <AdminPage title={"Administração"} />,
+                    }
                 ]
             }
         ]
