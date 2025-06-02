@@ -655,7 +655,7 @@ html body {
     &:focus {
         outline: none;
     }
-`;function AU({initial:e,min:t=0,max:n=100,onChange:r}){const[i,s]=m.useState(e);m.useEffect(()=>{s(e)},[e]),m.useEffect(()=>{r&&r(i)},[r,i]);const u=()=>{s(h=>{const v=h+1;return v>n?h:v})},f=()=>{s(h=>{const v=h-1;return v<t?h:v})},d=h=>{const v=h.target.value,p=v===""?"":parseInt(v,10);if(p===""||!isNaN(p)){if(p<t||p>n)return;s(p)}};return W.jsxs(TU,{children:[W.jsx(D2,{onClick:f,children:W.jsx(wj,{})}),W.jsx(DU,{inputMode:"numeric",value:i,onChange:d,min:t,max:n}),W.jsx(D2,{onClick:u,children:W.jsx(Ej,{})})]})}const PU=rt.div`
+`;function AU({initial:e,min:t=0,max:n=100,onChange:r}){const[i,s]=m.useState(e);m.useEffect(()=>{s(e)},[e]),m.useEffect(()=>{r&&r(i)},[i]);const u=()=>{s(h=>{const v=h+1;return v>n?h:v})},f=()=>{s(h=>{const v=h-1;return v<t?h:v})},d=h=>{const v=h.target.value,p=v===""?"":parseInt(v,10);if(p===""||!isNaN(p)){if(p<t||p>n)return;s(p)}};return W.jsxs(TU,{children:[W.jsx(D2,{onClick:f,children:W.jsx(wj,{})}),W.jsx(DU,{inputMode:"numeric",value:i,onChange:d,min:t,max:n}),W.jsx(D2,{onClick:u,children:W.jsx(Ej,{})})]})}const PU=rt.div`
     display: flex;
     flex-direction: column;
     align-items: center;
