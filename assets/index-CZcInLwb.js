@@ -75,7 +75,7 @@ Please change the parent <Route path="${R}"> to <Route path="${R==="/"?"*":`${R}
     align-items: center;
     width: 100%;
     padding: 30px 30px 100px;
-`;function fN(){return W.jsx(cN,{children:W.jsx(DR,{})})}const Oi=e=>{m.useEffect(()=>{document.title=`PokerBank - ${e}`},[])},dN=rt.header`
+`;function fN(){return W.jsx(cN,{children:W.jsx(DR,{})})}const Oi=e=>{m.useEffect(()=>{document.title=`${document.title} - ${e}`},[])},dN=rt.header`
     display: flex;
     width: 100%;
     justify-content: space-between;
