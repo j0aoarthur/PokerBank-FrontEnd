@@ -2,7 +2,7 @@
 import {HeaderLogo, HeaderProfile, HeaderWrapper} from "./styles.js";
 import Logo1 from "../../assets/images/logo1.png"; // Ensure this path is correct
 import {useNavigate} from "react-router-dom";
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 
 export function MainHeader() {
     const navigate = useNavigate();

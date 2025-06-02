@@ -1,17 +1,15 @@
 // src/pages/AllGamesPage/AllGamesPage.jsx
-import React, { useState, useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
-import { MainHeader } from "../../components/MainHeader/MainHeader.jsx";
-import { PageTitle } from "../../components/PageTitle/PageTitle.jsx";
-import { NavigationBar } from "../../components/NavigationBar/NavigationBar.jsx";
-import { Spinner } from "../../components/Spinner/Spinner.jsx";
-import { getAllGames } from "../../services/apiService.js";
-import { useTitle } from "../../utils/useTitle.js";
-import { formatDate, getDayOfWeek } from "../../utils/dateUtils.js";
-import { formatNumberToBRL } from "../../utils/numberUtils.js";
-import { AllGamesPageContainer, GamesList, GameItemStyled, GameInfo, GameStats } from "./styles.js";
-import { FaAngleRight } from "react-icons/fa6";
+import React, {useEffect, useState} from "react";
+import {useQuery} from "@tanstack/react-query";
+import {useNavigate} from "react-router-dom";
+import {MainHeader} from "../../components/MainHeader/MainHeader.jsx";
+import {PageTitle} from "../../components/PageTitle/PageTitle.jsx";
+import {NavigationBar} from "../../components/NavigationBar/NavigationBar.jsx";
+import {getAllGames} from "../../services/apiService.js";
+import {useTitle} from "../../utils/useTitle.js";
+import {formatDate, getDayOfWeek} from "../../utils/dateUtils.js";
+import {AllGamesPageContainer, GameInfo, GameItemStyled, GamesList} from "./styles.js";
+import {FaAngleRight} from "react-icons/fa6";
 
 export function AllGamesPage({ title }) {
     useTitle(title);

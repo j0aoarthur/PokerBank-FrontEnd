@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import {createBrowserRouter, createHashRouter, RouterProvider} from "react-router-dom";
+import {createHashRouter, RouterProvider} from "react-router-dom";
 import {Container} from "./components/Container/Container.jsx";
 import {HomePage} from "./pages/HomePage/HomePage.jsx";
 import {NewGamePage} from "./pages/NewGamePage/NewGamePage.jsx";
