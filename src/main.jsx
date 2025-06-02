@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import {createHashRouter, RouterProvider} from "react-router-dom";
+import {createBrowserRouter, createHashRouter, RouterProvider} from "react-router-dom";
 import {Container} from "./components/Container/Container.jsx";
 import {HomePage} from "./pages/HomePage/HomePage.jsx";
 import {NewGamePage} from "./pages/NewGamePage/NewGamePage.jsx";
@@ -37,19 +37,35 @@ const router = createHashRouter([
                         element: <NewGamePage title={"Nova Partida"}/>,
                     },
                     {
-                        path:"/game/:gameId",
+                        path:"game/:gameId",
                         element: <GameDetailsPage title={"Partida"}/>
                     },
                     {
-                        path:"/game/:gameId/player",
+                        path:"game/:gameId/player",
                         element: <AddPlayerToGamePage title={"Adicionar Jogador"}/>,
                     },
                     {
-                        path:"/ranking",
+                        path:"game/:gameId/player/:playerId/edit",
+                        element: <AddPlayerToGamePage />,
+                    },
+                    {
+                        path:"game/:gameId/player/:playerId",
+                        element: <PlayerGameDetailsPage />,
+                    },
+                    {
+                        path:"game/:gameId/payment",
+                        element: <MakePaymentPage title={"Realizar Pagamento"} />,
+                    },
+                    {
+                        path:"ranking",
                         element: <RankingPage title={"Ranking"}/>,
                     },
                     {
-                        path:"/admin",
+                        path: "games",
+                        element: <AllGamesPage title={"Todas as Partidas"} />
+                    },
+                    {
+                        path:"admin",
                         element: <AdminPage title={"Administração"} />,
                     }
                 ]

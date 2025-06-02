@@ -27,26 +27,11 @@ export function PaymentSuggestionSection({gameId}) {
         }
     }, [data]);
 
-    if (!paymentSuggestions || paymentSuggestions.length === 0) {
-        return (
-            <PaymentSuggestionContainer>
-                <SectionTitle title={"Sugestões de Pagamento"}/>
-                <PaymentSuggestionList>
-                    <PaymentSuggestionItem>
-                        <SuggestionText>
-                            Nenhuma sugestão de pagamento disponível.
-                        </SuggestionText>
-                    </PaymentSuggestionItem>
-                </PaymentSuggestionList>
-            </PaymentSuggestionContainer>
-        )
-    }
-
     return (
         <PaymentSuggestionContainer>
-            <SectionTitle title={"Sugestões de Pagamento"}/>
+            <SectionTitle title={"Pagamentos"} subtitle={"Pagar"} subtitleTo={"payment"}/>
             <PaymentSuggestionList>
-                {paymentSuggestions.map((suggestion) => (
+                {paymentSuggestions.length > 0 ? paymentSuggestions.map((suggestion) => (
                     <PaymentSuggestionItem key={`${suggestion.payerId}-${suggestion.receiverId}-${suggestion.amount}`}> {/* Chave mais robusta */}
                         <SuggestionText>
                             <PayerReceiverName>{suggestion.payerName}</PayerReceiverName>
@@ -55,7 +40,12 @@ export function PaymentSuggestionSection({gameId}) {
                             : <span className="amount">{formatNumberToBRL(suggestion.amount)}</span>
                         </SuggestionText>
                     </PaymentSuggestionItem>
-                ))}
+                )) : <PaymentSuggestionItem>
+                    <SuggestionText>
+                        Todos pagamentos foram realizados.
+                    </SuggestionText>
+                </PaymentSuggestionItem>
+                }
             </PaymentSuggestionList>
         </PaymentSuggestionContainer>
     )
