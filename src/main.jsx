@@ -10,6 +10,10 @@ import {AddPlayerToGamePage} from "./pages/AddPlayerToGamePage/AddPlayerToGamePa
 import {GameDetailsPage} from "./pages/GameDetailsPage/GameDetailsPage.jsx";
 import {RankingPage} from "./pages/RankingPage/RankingPage.jsx";
 import {AdminPage} from "./pages/AdminPage/AdminPage.jsx";
+import {MakePaymentPage} from "./pages/MakePaymentPage/MakePaymentPage.jsx";
+import {LoginPage} from "./pages/LoginPage/LoginPage.jsx";
+import {PlayerGameDetailsPage} from "./pages/PlayerGameDetailsPage/PlayerGameDetailsPage.jsx";
+import {AllGamesPage} from "./pages/AllGamesPage/AllGamesPage.jsx";
 
 const router = createHashRouter([
     {
@@ -25,7 +29,11 @@ const router = createHashRouter([
                         element: <HomePage title={"Página Principal"}/>,
                     },
                     {
-                        path:"/game",
+                        path:"login",
+                        element: <LoginPage title={"Login"}/>,
+                    },
+                    {
+                        path:"game",
                         element: <NewGamePage title={"Nova Partida"}/>,
                     },
                     {

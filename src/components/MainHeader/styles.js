@@ -23,7 +23,7 @@ export const HeaderProfile = styled.div`
         color: var(--text-gray-color);
         text-align: center;
         leading-trim: both;
-        font-size: 15px;
+        font-size: 13px;
         font-style: normal;
         font-weight: 700;
     }
@@ -32,7 +32,7 @@ export const HeaderProfile = styled.div`
         color: var(--text-black-color);
         text-align: center;
         leading-trim: both;
-        font-size: 25px;
+        font-size: 20px;
         font-style: normal;
         font-weight: 700;
     }
