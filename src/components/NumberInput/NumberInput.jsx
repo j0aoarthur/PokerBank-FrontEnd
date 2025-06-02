@@ -2,8 +2,12 @@ import {CircleButton, NumberDisplay, NumberInputContainer} from "./styles.js";
 import {useEffect, useState} from "react";
 import {FiMinus, FiPlus} from "react-icons/fi";
 
-export function NumberInput({initial = 0, min = 0, max = 100, onChange}) {
+export function NumberInput({initial, min = 0, max = 100, onChange}) {
     const [value, setValue] = useState(initial);
+
+    useEffect(() => {
+        setValue(initial);
+    }, [initial]);
 
     // Notify parent of value changes
     useEffect(() => {

@@ -5,51 +5,64 @@ import {useQuery} from "@tanstack/react-query";
 import {getPlayersNotInGame} from "../../services/apiService.js";
 import {useParams} from "react-router-dom";
 
-export function PlayerSelectSection({onChange}) {
+export function PlayerSelectSection({onChange, playerIdValue, initialCashValue, isEditMode, currentPlayerName}) {
     const {gameId} = useParams()
-    const {playerId} = useId()
-    const {balanceId} = useId()
+    const selectPlayerId = useId();
+    const balanceId = useId();
     const [maskedValue, setMaskedValue] = useState("");
     const [players, setPlayers] = useState([]);
 
-    const {data} = useQuery({
-        queryKey: ["players"],
+    const {data: playersNotInGame, isLoading: isLoadingPlayersNotINGame} = useQuery({
+        queryKey: ["playersNotInGame", gameId],
         queryFn: () =>  getPlayersNotInGame(gameId),
+        enabled: !isEditMode,
     })
 
     useEffect(() => {
-        if (data) {
-            setPlayers(data);
+        if (!isEditMode && playersNotInGame) {
+            setPlayers(playersNotInGame);
+        } else if (isEditMode && playerIdValue && currentPlayerName) {
+            setPlayers([{id: playerIdValue, name: currentPlayerName}]);
         }
-    }, [data]);
+    }, [playersNotInGame, isEditMode, playerIdValue, currentPlayerName]);
+
+    useEffect(() => {
+        if (initialCashValue !== null && initialCashValue !== undefined) {
+            setMaskedValue(initialCashValue.toString());
+        } else {
+            setMaskedValue("");
+        }
+    }, [initialCashValue])
 
     const handleBalanceChange = (event) => {
         const value = event.target.value.replace(/\D/g, '');
         if (value) {
             const formattedValue = (parseInt(value, 10) / 100).toFixed(2);
             setMaskedValue(formattedValue);
-            onChange(event.target.name, formattedValue); // Use formattedValue directly
+            onChange(event.target.name, formattedValue);
         } else {
             setMaskedValue("");
-            onChange(event.target.name, ""); // Pass an empty string if no value
+            onChange(event.target.name, "");
         }
     };
 
     return (
-        players && (
+        (!isLoadingPlayersNotINGame || isEditMode) && (
             <FormWrapper>
                 <InputWrapper>
-                    <label htmlFor={playerId}>Jogador<span> *</span></label>
+                    <label htmlFor={selectPlayerId}>Jogador<span> *</span></label>
                     <Select
-                        id={playerId}
+                        id={selectPlayerId}
                         placeholder="Selecionar Jogador"
-                        onChange={(playerId) => onChange("playerId", playerId)}
+                        onChange={(selectedPlayerId) => onChange("playerId", selectedPlayerId)}
                         style={{ width: '100%' }}
-                        notFoundContent={"Todos jogadores presentes na partida!"}
+                        notFoundContent={isEditMode ? "" : "Todos jogadores já estão na partida ou nenhum jogador cadastrado!"}
                         options={players.map(player => ({
                             label: player.name,
                             value: player.id,
                         }))}
+                        value={playerIdValue}
+                        disabled={isEditMode}
                     />
                 </InputWrapper>
                 <InputWrapper>

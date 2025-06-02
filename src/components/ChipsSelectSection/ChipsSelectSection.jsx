@@ -4,9 +4,9 @@ import {getChips} from "../../services/apiService.js";
 import {useQuery} from "@tanstack/react-query";
 import capitalize from "antd/es/_util/capitalize.js";
 
-export function ChipsSelectSection({onChange}) {
+export function ChipsSelectSection({onChange, chipsData = []}) {
 
-    const { data: chips = [] } = useQuery({
+    const { data: availableChips = [] } = useQuery({
         queryKey: ['chips'],
         queryFn: getChips
     });
@@ -15,13 +15,17 @@ export function ChipsSelectSection({onChange}) {
         <SectionWrapper>
             <h2>Fichas</h2>
             <ChipsSection>
-                {chips.map(chip => (
-                    <ChipSelect key={chip.id}>
-                        <h3>{capitalize(chip.color)}</h3>
-                        <NumberInput onChange={(value) => onChange(chip.id, value)} />
-                    </ChipSelect>
-                ))}
+                {availableChips && availableChips.map(chip => {
+                    const existingChipData = chipsData.find(cd => cd.chipId === chip.id);
+                    const initialQuantity = existingChipData ? existingChipData.quantity : 0;
+                    return (
+                        <ChipSelect key={chip.id}>
+                            <h3>{capitalize(chip.color)}</h3>
+                            <NumberInput initial={initialQuantity} onChange={(value) => onChange(chip.id, value)}/>
+                        </ChipSelect>
+                    );
+                })}
             </ChipsSection>
         </SectionWrapper>
-    )
+    );
 }
