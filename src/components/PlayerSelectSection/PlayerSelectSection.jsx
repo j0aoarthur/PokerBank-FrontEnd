@@ -28,7 +28,7 @@ export function PlayerSelectSection({onChange, playerIdValue, initialCashValue, 
 
     useEffect(() => {
         if (initialCashValue !== null && initialCashValue !== undefined) {
-            setMaskedValue(initialCashValue.toString());
+            setMaskedValue(Number(initialCashValue).toFixed(2));
         } else {
             setMaskedValue("");
         }
