@@ -31,9 +31,10 @@ export const SuggestionText = styled.p`
     color: var(--text-black-color);
     display: flex;
     align-items: center;
-    gap: 0.3em; // Espaçamento entre os elementos do texto
+    text-align: center;
+    gap: 0.3em;
 
-    span.amount { // Mantém o estilo original para o valor
+    span.amount {
         font-weight: 600;
         color: var(--green-color);
     }

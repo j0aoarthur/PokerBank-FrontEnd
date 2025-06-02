@@ -1,7 +1,13 @@
 import {GameDetailsWrapper, InfoItem, InfoList} from "./styles.js";
 import {formatNumberToBRL} from "../../utils/numberUtils.js";
+import {formatDate} from "../../utils/dateUtils.js";
 
 export function GameDetailsSection({game}) {
+    const isDueDateInFuture = new Date(game.dueDate) > new Date();
+    const dueDateStyle = {
+        color: isDueDateInFuture ? 'inherit' : 'red'
+    };
+
 
     return (
         <GameDetailsWrapper>
@@ -10,6 +16,10 @@ export function GameDetailsSection({game}) {
                 <InfoItem>
                     <p>Partida Finalizada</p>
                     <h3>{game.isFinished ? "Sim" : "Não"}</h3>
+                </InfoItem>
+                <InfoItem>
+                    <p>Data de Vencimento</p>
+                    <h3 style={dueDateStyle}>{formatDate(game.dueDate)}</h3>
                 </InfoItem>
                 <InfoItem>
                     <p>Saldo geral:</p>

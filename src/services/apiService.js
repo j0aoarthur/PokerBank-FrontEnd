@@ -35,11 +35,6 @@ export const getPlayersOfGame = async (gameId) => {
     return response.data
 }
 
-export const getPlayerDetails = async (gameId, playerId) => {
-    const response = await axiosInstance.get(`/games/${gameId}/players/${playerId}`)
-    return response.data
-}
-
 export const getGameDetails = async (gameId) => {
     const response = await axiosInstance.get(`/games/${gameId}`)
     return response.data
@@ -56,7 +51,7 @@ export const getPlayersNotInGame = async (gameId) => {
 }
 
 export const getPaymentSuggestion = async (gameId) => {
-    const response = await axiosInstance.get(`/games/${gameId}/payment-suggestion`)
+    const response = await axiosInstance.get(`/payment/suggestion/${gameId}`)
     return response.data
 }
 
@@ -70,8 +65,22 @@ export const addChip = async (chipData) => {
     return response.data;
 }
 
-
 export const getChips = async () => {
     const response = await axiosInstance.get("/chips");
+    return response.data;
+}
+
+export const makePayment = async (paymentData) => {
+    const response = await axiosInstance.post("/payment", paymentData);
+    return response.data;
+};
+
+export const getPlayerGameDetails = async (gameId, playerId) => {
+    const response = await axiosInstance.get(`/games/${gameId}/players/${playerId}`);
+    return response.data;
+};
+
+export const updatePlayerInGame = async (gameId, playerId, playerGameData) => {
+    const response = await axiosInstance.put(`/games/${gameId}/players/${playerId}`, playerGameData);
     return response.data;
 }

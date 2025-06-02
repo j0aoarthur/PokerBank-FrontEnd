@@ -27,7 +27,7 @@ export function GameSection() {
 
     return (
         <GameSectionContainer>
-            <SectionTitle title={"Últimas partidas"} subtitle={"Ver todas"}/>
+            <SectionTitle title={"Últimas partidas"} subtitle={"Ver todas"} subtitleTo={"/games"}/>
             <GameList>
                 {games.map((game) => (
                     <GameItem key={game.id} onClick={() => navigate(`/game/${game.id}`)} >

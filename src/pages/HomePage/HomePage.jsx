@@ -14,7 +14,7 @@ export function HomePage({title}) {
             <MainHeader/>
             <ButtonsContainer>
                 <Button to="/game" >Nova Partida</Button>
-                <Button to="/">Pagar Dívida</Button>
+                <Button to="/admin">Administração</Button>
             </ButtonsContainer>
             <GameSection />
             <RankingSection/>

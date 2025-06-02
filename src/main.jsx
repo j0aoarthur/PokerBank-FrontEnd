@@ -10,6 +10,10 @@ import {AddPlayerToGamePage} from "./pages/AddPlayerToGamePage/AddPlayerToGamePa
 import {GameDetailsPage} from "./pages/GameDetailsPage/GameDetailsPage.jsx";
 import {RankingPage} from "./pages/RankingPage/RankingPage.jsx";
 import {AdminPage} from "./pages/AdminPage/AdminPage.jsx";
+import {MakePaymentPage} from "./pages/MakePaymentPage/MakePaymentPage.jsx";
+import {LoginPage} from "./pages/LoginPage/LoginPage.jsx";
+import {PlayerGameDetailsPage} from "./pages/PlayerGameDetailsPage/PlayerGameDetailsPage.jsx";
+import {AllGamesPage} from "./pages/AllGamesPage/AllGamesPage.jsx";
 
 const router = createHashRouter([
     {
@@ -25,23 +29,43 @@ const router = createHashRouter([
                         element: <HomePage title={"Página Principal"}/>,
                     },
                     {
-                        path:"/game",
+                        path:"login",
+                        element: <LoginPage title={"Login"}/>,
+                    },
+                    {
+                        path:"game",
                         element: <NewGamePage title={"Nova Partida"}/>,
                     },
                     {
-                        path:"/game/:gameId",
+                        path:"game/:gameId",
                         element: <GameDetailsPage title={"Partida"}/>
                     },
                     {
-                        path:"/game/:gameId/player",
+                        path:"game/:gameId/player",
                         element: <AddPlayerToGamePage title={"Adicionar Jogador"}/>,
                     },
                     {
-                        path:"/ranking",
+                        path:"game/:gameId/player/:playerId/edit",
+                        element: <AddPlayerToGamePage />,
+                    },
+                    {
+                        path:"game/:gameId/player/:playerId",
+                        element: <PlayerGameDetailsPage />,
+                    },
+                    {
+                        path:"game/:gameId/payment",
+                        element: <MakePaymentPage title={"Realizar Pagamento"} />,
+                    },
+                    {
+                        path:"ranking",
                         element: <RankingPage title={"Ranking"}/>,
                     },
                     {
-                        path:"/admin",
+                        path: "games",
+                        element: <AllGamesPage title={"Todas as Partidas"} />
+                    },
+                    {
+                        path:"admin",
                         element: <AdminPage title={"Administração"} />,
                     }
                 ]
