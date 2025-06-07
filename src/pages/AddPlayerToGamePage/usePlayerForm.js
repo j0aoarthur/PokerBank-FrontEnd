@@ -1,16 +1,17 @@
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {addPlayerToGame, getPlayerGameDetails, updatePlayerInGame} from "../../services/apiService.js";
-import {useMutation, useQuery} from "@tanstack/react-query";
+import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 
 export function usePlayerForm() {
     const { gameId, playerId: playerIdFromParams } = useParams();
     const navigate = useNavigate();
     const isEditMode = !!playerIdFromParams;
+    const queryClient = useQueryClient();
 
     const [formData, setFormData] = useState({
         gameId: gameId,
-        playerId: isEditMode ? playerIdFromParams : null,
+        playerId: isEditMode ? playerIdFromParams : "",
         initialCash: null,
         chips: [],
     });
@@ -77,6 +78,8 @@ export function usePlayerForm() {
         onSuccess: (data, variables) => {
             const message = variables.isEditMode ? "Jogador atualizado com sucesso!" : "Jogador adicionado com sucesso!";
             alert(message);
+            queryClient.invalidateQueries({queryKey: ["playersNotInGame", gameId]})
+            setCurrentPlayerName("")
             if (variables.redirect) {
                 navigate(`/game/${formData.gameId}`);
             } else {

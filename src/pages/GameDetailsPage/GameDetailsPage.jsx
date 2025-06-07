@@ -1,16 +1,14 @@
-import {MainHeader} from "../../components/MainHeader/MainHeader.jsx";
-import {PageTitle} from "../../components/PageTitle/PageTitle.jsx";
-import {formatDate, getDayOfWeek} from "../../utils/dateUtils.js";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useQuery} from "@tanstack/react-query";
 import {getGameDetails} from "../../services/apiService.js";
 import {useParams} from "react-router-dom";
-import {GameDetailsPageWrapper} from "./styles.js";
+import {GameDate, GameName, GameTitleSummary, PageWrapper} from "./styles.js";
 import {GameParticipantsSection} from "../../components/GameParticipantsSection/GameParticipantsSection.jsx";
 import {GameDetailsSection} from "../../components/GameDetailsSection/GameDetailsSection.jsx";
 import {useTitle} from "../../utils/useTitle.js";
-import {NavigationBar} from "../../components/NavigationBar/NavigationBar.jsx";
 import {PaymentSuggestionSection} from "../../components/PaymentSuggestionSection/PaymentSuggestionSection.jsx";
+import {PageHeader} from "../../components/PageHeader/PageHeader.jsx";
+import {formatFullDate} from "../../utils/dateUtils.js";
 
 export function GameDetailsPage({title}) {
     useTitle(title)
@@ -30,14 +28,18 @@ export function GameDetailsPage({title}) {
 
     return (
         game && (
-            <GameDetailsPageWrapper>
-                <MainHeader/>
-                <PageTitle text="Partida" subtitle={`Dia ${formatDate(game.date)} (${getDayOfWeek(game.date)})`}/>
-                <GameDetailsSection game={game}/>
-                <GameParticipantsSection gameId={gameId}/>
-                <PaymentSuggestionSection gameId={gameId}/>
-                <NavigationBar/>
-            </GameDetailsPageWrapper>
+            <PageWrapper>
+                <PageHeader title="Detalhes da Partida" />
+                <main>
+                    <GameTitleSummary>
+                        <GameName>Partida</GameName>
+                        <GameDate>{formatFullDate(game.date)}</GameDate>
+                    </GameTitleSummary>
+                    <GameDetailsSection game={game}/>
+                    <GameParticipantsSection gameId={gameId}/>
+                    <PaymentSuggestionSection gameId={gameId}/>
+                </main>
+            </PageWrapper>
         )
     )
 }

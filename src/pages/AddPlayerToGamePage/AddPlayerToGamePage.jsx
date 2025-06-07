@@ -1,12 +1,11 @@
 import {usePlayerForm} from "./usePlayerForm.js";
 import {PlayerSelectSection} from "../../components/PlayerSelectSection/PlayerSelectSection.jsx";
 import {ChipsSelectSection} from "../../components/ChipsSelectSection/ChipsSelectSection.jsx";
-import {ButtonsContainer, NewPlayerForm, NewPlayerPageContainer} from "./styles.js";
-import {Button} from "../../components/Button/Button.jsx";
-import {PageTitle} from "../../components/PageTitle/PageTitle.jsx";
-import {MainHeader} from "../../components/MainHeader/MainHeader.jsx";
+import {ActionButtonsContainer, MainContent, NewPlayerPageContainer, PrimaryButton, SecondaryButton} from "./styles.js";
 import {useTitle} from "../../utils/useTitle.js";
 import {useNavigate, useParams} from "react-router-dom";
+import {PageHeader} from "../../components/PageHeader/PageHeader.jsx";
+import React from "react";
 
 export function AddPlayerToGamePage() {
     const { gameId, playerId: playerIdFromParams } = useParams();
@@ -19,9 +18,8 @@ export function AddPlayerToGamePage() {
 
     return (
         <NewPlayerPageContainer>
-            <MainHeader />
-            <NewPlayerForm>
-                <PageTitle text={isEditMode ? "Editar Jogador na Partida" : "Adicionar Jogador"} />
+            <PageHeader title={"Adicionar Jogador"}/>
+            <MainContent>
                 <PlayerSelectSection
                     onChange={handleInputChange}
                     playerIdValue={formData.playerId}
@@ -29,42 +27,30 @@ export function AddPlayerToGamePage() {
                     isEditMode={isEditMode}
                     currentPlayerName={isEditMode ? currentPlayerName : ""}
                 />
-                <ChipsSelectSection onChange={handleInputChange} chipsData={formData.chips}/>
-                <ButtonsContainer>
-                    {isEditMode ? (
+                <ChipsSelectSection chipsData={formData.chips} onChange={handleInputChange} />
+                <ActionButtonsContainer>
+                    { isEditMode ? (
                         <>
-                            <Button
-                                onClick={() => handleSubmit(true)}
-                                disabled={isSubmitting}
-                            >
-                                {isSubmitting ? "Salvando..." : "Salvar Edição"}
-                            </Button>
-                            <Button
-                                onClick={() => navigate(`/game/${gameId}`)}
-                            >
-                                Voltar
-                            </Button>
+                            <PrimaryButton onClick={() => handleSubmit(true)} disabled={isSubmitting}>
+                                <span>Salvar Edição</span>
+                            </PrimaryButton>
+                            <SecondaryButton onClick={() => navigate(`/game/${gameId}`)} disabled={isSubmitting}>
+                                <span>Voltar</span>
+                            </SecondaryButton>
                         </>
                     ) : (
                         <>
-                            <Button
-                                onClick={() => handleSubmit(true)}
-                                disabled={isSubmitting}
-                            >
-                                {isSubmitting ? "Adicionando..." : "Finalizar e Ver Partida"}
-                            </Button>
-
-                            <Button
-                                onClick={() => handleSubmit(false)}
-                                disabled={isSubmitting}
-                            >
-                                {isSubmitting ? "Adicionando..." : "Adicionar Outro Jogador"}
-                            </Button>
-
+                            <PrimaryButton onClick={() => handleSubmit(true)} disabled={isSubmitting}>
+                                <span>{isSubmitting ? "Adicionando..." : "Adicionar e Ver Partida"}</span>
+                            </PrimaryButton>
+                            <SecondaryButton onClick={() => handleSubmit(false)} disabled={isSubmitting}>
+                                <span>{isSubmitting ? "Adicionando..." : "Adicionar Outro Jogador"}</span>
+                            </SecondaryButton>
                         </>
                     )}
-                </ButtonsContainer>
-            </NewPlayerForm>
+
+                </ActionButtonsContainer>
+            </MainContent>
         </NewPlayerPageContainer>
     );
 }

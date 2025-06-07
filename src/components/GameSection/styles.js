@@ -1,54 +1,40 @@
 import styled from "styled-components";
 
-export const GameSectionContainer = styled.section`
+export const ItemList = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 24px;
-    align-self: stretch;
-`
+    gap: calc(0.75 * var(--space-4)); 
+`;
 
-export const GameList = styled.div`
+export const CardItem = styled.div`
+    background-color: var(--panel-background-color); 
+    padding: var(--space-4); 
+    border-radius: var(--rounded-lg); 
     display: flex;
-    max-height: 200px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    align-self: stretch;
-`
-
-export const GameItem = styled.div`
-    display: flex;
-    padding: 15px 18px;
-    justify-content: space-between;
     align-items: center;
-    align-self: stretch;
-    background: var(--white-color);
-    border-radius: 15px;
-    
-    &:active {
-        filter: brightness(0.9);
-    }
-`
+    justify-content: space-between;
+    box-shadow: var(--shadow-md-custom); 
+    border: 1px solid var(--panel-border-color); 
+    transition: background-color 0.2s;
+    cursor: pointer;
 
-export const GameItemInfo = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 6px;
-    
-    & > h3 {
-        color: var(--text-black-color);
-        leading-trim: both;
-        font-size: 16px;
-        font-weight: 600;
+    &:hover {
+        background-color: var(--panel-border-color); 
     }
-    
-    & > p {
-        color: var(--text-light-gray-color);
-        leading-trim: both;
-        font-size: 11px;
-        font-weight: 400;
+
+    .material-icons, svg {
+        color: var(--primary-color-dark); 
+        font-size: var(--text-2xl);
     }
-`
+`;
+
+export const ItemTextMain = styled.p`
+  color: var(--primary-color-dark); 
+  font-weight: var(--font-medium); 
+`;
+
+export const ItemTextSecondary = styled.p`
+  color: var(--secondary-color-gray); 
+  font-size: var(--text-sm);
+`;
+

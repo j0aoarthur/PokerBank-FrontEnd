@@ -1,8 +1,7 @@
-import {CircleButton, NumberDisplay, NumberInputContainer} from "./styles.js";
-import {useEffect, useState} from "react";
-import {FiMinus, FiPlus} from "react-icons/fi";
+import {QuantityButton, QuantityInput, QuantityInputGroup} from "./styles.js";
+import React, {useEffect, useState} from "react";
 
-export function NumberInput({initial, min = 0, max = 100, onChange}) {
+export function ChipQuantityControl({initial, min = 0, max = 100, onChange}) {
     const [value, setValue] = useState(initial);
 
     useEffect(() => {
@@ -34,28 +33,24 @@ export function NumberInput({initial, min = 0, max = 100, onChange}) {
 
     const handleChange = (e) => {
         const raw = e.target.value;
-        const parsed = raw === "" ? "" : parseInt(raw, 10);
+        const parsed = raw === "" ? setValue(min) : parseInt(raw, 10);
         if (parsed === "" || !isNaN(parsed)) {
-            if (parsed < min || parsed > max) return;
+            if (parsed < min || parsed > max) return ;
             setValue(parsed);
         }
     };
 
     return (
-        <NumberInputContainer>
-            <CircleButton onClick={handleDecrement}>
-                <FiMinus/>
-            </CircleButton>
-            <NumberDisplay
-                inputMode="numeric"
+        <QuantityInputGroup>
+            <QuantityButton onClick={handleDecrement}>-</QuantityButton>
+            <QuantityInput
+                inputMode={"numeric"}
                 value={value}
                 onChange={handleChange}
                 min={min}
                 max={max}
             />
-            <CircleButton onClick={handleIncrement}>
-                <FiPlus/>
-            </CircleButton>
-        </NumberInputContainer>
+            <QuantityButton onClick={handleIncrement}>+</QuantityButton>
+        </QuantityInputGroup>
     );
 }

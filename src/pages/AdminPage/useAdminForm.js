@@ -1,15 +1,22 @@
-import {useState} from "react";
+import {useId, useState} from "react";
 import {useMutation, useQuery} from "@tanstack/react-query";
-import {addChip, createPlayer, getChips} from "../../services/apiService.js";
+import {addChip, createPlayer, getAllPlayers, getChips} from "../../services/apiService.js";
 
 export function useAdminForm() {
+    const id = useId();
     const [newPlayerName, setNewPlayerName] = useState("");
     const [newChipName, setNewChipName] = useState("");
+    const [newChipColor, setNewChipColor] = useState("");
     const [newChipValue, setNewChipValue] = useState("");
 
     const { data: existingChips } = useQuery({
         queryKey: ["chipsData"],
         queryFn: getChips,
+    });
+
+    const {data: existingPlayers} = useQuery({
+        queryKey: ["allPlayers"],
+        queryFn: getAllPlayers,
     });
 
     const { mutate: createPlayerMutate, isPending: isCreatingPlayer } = useMutation({
@@ -54,7 +61,12 @@ export function useAdminForm() {
         }
     };
 
-    const handleAddPlayerSubmit = (event) => {
+    const handleNewChipColorChange = (event) => {
+        const value = event.target.value;
+        setNewChipColor(value);
+    };
+
+    const handleAddPlayer = (event) => {
         event.preventDefault();
         if (!newPlayerName.trim()) {
             alert("Por favor, insira o nome do jogador.");
@@ -63,10 +75,10 @@ export function useAdminForm() {
         createPlayerMutate({ name: newPlayerName });
     };
 
-    const handleAddChipSubmit = (event) => {
+    const handleAddChip = (event) => {
         event.preventDefault();
-        if (!newChipName.trim() || !newChipValue.trim()) {
-            alert("Por favor, preencha o nome da cor e o valor da ficha.");
+        if (!newChipName.trim() || !newChipValue.trim() || !newChipColor.trim()) {
+            alert("Por favor, preencha o nome, o valor e a cor da ficha.");
             return;
         }
         const value = parseFloat(newChipValue);
@@ -74,20 +86,29 @@ export function useAdminForm() {
             alert("Por favor, insira um valor numérico positivo para a ficha.");
             return;
         }
-        addChipMutate({ color: newChipName, value });
+        if (!/^#([0-9A-Fa-f]{3}){1,2}$/.test(newChipColor.trim())) {
+            alert("Por favor, insira uma cor válida no formato hexadecimal (ex: #FF0000, #FFF).");
+            return;
+        }
+
+        addChipMutate({ color: newChipName, value, colorHex: newChipColor });
     };
 
     return {
+        id,
         newPlayerName,
         handlePlayerNameChange,
         newChipName,
         newChipValue,
+        newChipColor,
         handleNewChipNameChange,
         handleNewChipValueChange,
+        handleNewChipColorChange,
         existingChips,
-        handleAddPlayerSubmit,
+        existingPlayers,
+        handleAddPlayer,
         isCreatingPlayer,
-        handleAddChipSubmit,
-        isAddingChip
+        handleAddChip,
+        isAddingChip,
     };
 }

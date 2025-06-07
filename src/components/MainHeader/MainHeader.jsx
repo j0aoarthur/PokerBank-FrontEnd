@@ -1,6 +1,5 @@
-// src/components/MainHeader/MainHeader.jsx
 import {HeaderLogo, HeaderProfile, HeaderWrapper} from "./styles.js";
-import Logo1 from "../../assets/images/logo1.png"; // Ensure this path is correct
+import Logo1 from "../../assets/images/logo1.png";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 

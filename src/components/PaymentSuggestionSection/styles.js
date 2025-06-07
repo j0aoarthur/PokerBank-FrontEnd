@@ -1,47 +1,40 @@
-// src/components/PaymentSuggestionSection/styles.js
 import styled from "styled-components";
 
-export const PaymentSuggestionContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 25px;
-`
-
-export const PaymentSuggestionList = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    padding: 16px;
-    background-color: var(--white-color);
-    border-radius: 15px;
+export const PaymentSuggestionItemCard = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  background-color: var(--panel-background-color); 
+  padding: var(--space-4); 
+  border-radius: var(--rounded-lg); 
+  border: 1px solid var(--panel-border-color); 
 `;
 
-export const PaymentSuggestionItem = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px;
-    border-radius: 8px;
-    background-color: var(--background-color);
-`;
-
-export const SuggestionText = styled.p`
-    font-size: 14px;
-    color: var(--text-black-color);
+export const PaymentSuggestionInfo = styled.div`
     display: flex;
     align-items: center;
-    text-align: center;
-    gap: 0.3em;
-
-    span.amount {
-        font-weight: 600;
-        color: var(--green-color);
+    gap: var(--space-3);  
+    svg { 
+        color: var(--secondary-color-gray); 
+        font-size: var(--text-2xl-icon); 
     }
 `;
 
-export const PayerReceiverName = styled.strong`
-  font-weight: 600;
+export const PaymentText = styled.p`
+  font-size: var(--text-sm); 
+  font-weight: var(--font-medium); 
+  color: var(--primary-color-dark); 
+
+  span { 
+    font-weight: var(--font-semibold); 
+  }
+`;
+
+export const PaymentAmount = styled.p`
+  font-size: var(--text-base); 
+  font-weight: var(--font-semibold); 
+  color: var(--primary-color-dark);
 `;
 
 export const PaymentArrow = styled.span`

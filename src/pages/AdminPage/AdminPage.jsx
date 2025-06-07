@@ -1,105 +1,144 @@
-import {Input} from 'antd';
-import {MainHeader} from "../../components/MainHeader/MainHeader.jsx";
-import {PageTitle} from "../../components/PageTitle/PageTitle.jsx";
-import {Button} from "../../components/Button/Button.jsx";
-import {SectionTitle} from "../../components/SectionTitle/SectionTitle.jsx";
 import {useTitle} from "../../utils/useTitle.js";
 import {useAdminForm} from "./useAdminForm.js";
 import {
     AdminPageContainer,
-    AdminSection,
-    ChipListContainer,
-    ChipListItem,
-    FormWrapper,
-    InputWrapper
+    Card,
+    ChipColorSwatch,
+    ChipInfoContainer,
+    Hr,
+    InputField,
+    ItemList,
+    ItemText,
+    Label,
+    ListHeader,
+    ListItem,
+    MainContent,
+    SubmitButton
 } from "./styles.js";
 import {formatNumberToBRL} from "../../utils/numberUtils.js";
 import capitalize from "antd/es/_util/capitalize.js";
-import {NavigationBar} from "../../components/NavigationBar/NavigationBar.jsx";
+import {PageHeader} from "../../components/PageHeader/PageHeader.jsx";
+import {Section} from "../../components/Section/Section.jsx";
+import React from "react";
 
 export function AdminPage({ title }) {
     useTitle(title);
     const {
+        id,
         newPlayerName,
         handlePlayerNameChange,
         newChipName,
         newChipValue,
+        newChipColor,
         handleNewChipNameChange,
         handleNewChipValueChange,
+        handleNewChipColorChange,
         existingChips,
-        handleAddPlayerSubmit,
+        existingPlayers,
+        handleAddPlayer,
         isCreatingPlayer,
-        handleAddChipSubmit,
+        handleAddChip,
         isAddingChip
     } = useAdminForm();
 
     return (
         <AdminPageContainer>
-            <MainHeader />
-            <PageTitle text="Administração" subtitle="Gerenciar jogadores e fichas" />
+            <PageHeader title={"Administração"}/>
+            <MainContent>
+                <Section title={"Gerenciar Jogadores"}>
+                    <Card>
+                        <div>
+                            <Label htmlFor={id + '-player'}>Nome do Jogador</Label>
+                            <InputField
+                                id={id + '-player'}
+                                type="text"
+                                placeholder="Digite o nome do novo jogador"
+                                value={newPlayerName}
+                                onChange={handlePlayerNameChange}
+                            />
+                        </div>
+                        <SubmitButton onClick={handleAddPlayer} disabled={isCreatingPlayer}>
+                            {isCreatingPlayer ? "Salvando..." : "Adicionar Jogador"}
+                        </SubmitButton>
+                    </Card>
+                    <Card>
+                        <ListHeader>Jogadores</ListHeader>
+                        <ItemList>
+                            {existingPlayers ? (
+                                existingPlayers.map(player => (
+                                    <ListItem key={player.id}>
+                                        <ItemText>{player.name}</ItemText>
+                                    </ListItem>
+                                ))
+                            ) : (
+                                <ListItem>
+                                    <ItemText>Nenhum jogador cadastrado.</ItemText>
+                                </ListItem>
+                            )}
+                        </ItemList>
+                    </Card>
+                </Section>
 
-            <AdminSection>
-                <SectionTitle title="Cadastrar Novo Jogador" />
-                <FormWrapper>
-                    <InputWrapper>
-                        <label htmlFor="newPlayerName">Nome do Jogador<span> *</span></label>
-                        <Input
-                            id="newPlayerName"
-                            placeholder="Digite o nome do novo jogador"
-                            value={newPlayerName}
-                            onChange={handlePlayerNameChange}
-                            size="large"
-                        />
-                    </InputWrapper>
-                    <Button onClick={handleAddPlayerSubmit} disabled={isCreatingPlayer}>
-                        {isCreatingPlayer ? "Salvando..." : "Cadastrar Jogador"}
-                    </Button>
-                </FormWrapper>
-            </AdminSection>
+                <Hr />
 
-            <AdminSection>
-                <SectionTitle title="Gerenciar Fichas" />
-                <FormWrapper>
-                    <InputWrapper>
-                        <label htmlFor="newChipName">Nome da Cor da Ficha<span> *</span></label>
-                        <Input
-                            id="newChipName"
-                            placeholder="Ex: Roxa, Laranja"
-                            value={newChipName}
-                            onChange={handleNewChipNameChange}
-                            size="large"
-                        />
-                    </InputWrapper>
-                    <InputWrapper>
-                        <label htmlFor="newChipValue">Valor da Ficha<span> *</span></label>
-                        <Input
-                            id="newChipValue"
-                            addonBefore="R$"
-                            placeholder="100.00"
-                            value={newChipValue}
-                            onChange={handleNewChipValueChange}
-                            inputMode="decimal"
-                            size="large"
-                        />
-                    </InputWrapper>
-                    <Button onClick={handleAddChipSubmit} disabled={isAddingChip}>
-                        {isAddingChip ? "Adicionando..." : "Adicionar Ficha"}
-                    </Button>
-                </FormWrapper>
-
-                <SectionTitle title="Fichas Cadastradas" />
-                {existingChips ? (
-                    <ChipListContainer>
-                        {existingChips.map(chip => (
-                            <ChipListItem key={chip.id}>
-                                <span>{capitalize(chip.color)}</span>
-                                <span>{formatNumberToBRL(chip.value)}</span>
-                            </ChipListItem>
-                        ))}
-                    </ChipListContainer>
-                ) : <p>Nenhuma ficha cadastrada.</p>}
-            </AdminSection>
-            <NavigationBar activePage={"admin"} />
+                <Section title={"Gerenciar Fichas"}>
+                    <Card>
+                        <div>
+                            <Label htmlFor={id + 'chip-name'}>Cor da ficha</Label>
+                            <InputField
+                                id={id + 'chip-name'}
+                                type="text"
+                                placeholder="Ex. Vermelha, Azul"
+                                value={newChipName}
+                                onChange={handleNewChipNameChange}
+                            />
+                        </div>
+                        <div>
+                            <Label htmlFor={id + 'chip-value'}>Valor da ficha (R$)</Label>
+                            <InputField
+                                id={id + 'chip-value'}
+                                type="number"
+                                placeholder="Digite o valor da ficha"
+                                value={newChipValue}
+                                onChange={handleNewChipValueChange}
+                            />
+                        </div>
+                        <div>
+                            <Label htmlFor={id + 'chip-color'}>Cor da ficha</Label>
+                            <InputField
+                                id={id + 'chip-color'}
+                                type="text"
+                                placeholder="Ex. #FF0000, #0000FF"
+                                value={newChipColor}
+                                onChange={handleNewChipColorChange}
+                                maxLength={7}
+                            />
+                        </div>
+                        <SubmitButton onClick={handleAddChip} disabled={isAddingChip}>
+                            {isAddingChip ? "Adicionando..." : "Adicionar Ficha"}
+                        </SubmitButton>
+                    </Card>
+                    <Card>
+                        <ListHeader>Tipos de Fichas</ListHeader>
+                        <ItemList>
+                            {existingChips ? (
+                                existingChips.map(chip => (
+                                    <ListItem key={chip.id}>
+                                        <ChipInfoContainer>
+                                            <ChipColorSwatch color={chip.colorHex} />
+                                            <ItemText>{capitalize(chip.color)} - {formatNumberToBRL(chip.value)}</ItemText>
+                                        </ChipInfoContainer>
+                                    </ListItem>
+                                ))
+                            ) : (
+                                <ListItem>
+                                    <ItemText>Nenhuma ficha cadastrada.</ItemText>
+                                </ListItem>
+                            )}
+                        </ItemList>
+                    </Card>
+                </Section>
+            </MainContent>
         </AdminPageContainer>
     );
 }

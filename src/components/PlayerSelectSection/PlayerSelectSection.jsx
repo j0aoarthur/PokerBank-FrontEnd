@@ -1,14 +1,21 @@
-import {FormWrapper, InputWrapper} from "./styles.js";
-import {Input, Select} from "antd";
-import {useEffect, useId, useState} from "react";
+import {
+    FormFieldsContainer,
+    FormSection,
+    Label,
+    NumberInputStyled,
+    SelectArrow,
+    SelectInput,
+    SelectWrapper
+} from "./styles.js";
+import React, {useEffect, useId, useState} from "react";
 import {useQuery} from "@tanstack/react-query";
 import {getPlayersNotInGame} from "../../services/apiService.js";
 import {useParams} from "react-router-dom";
+import {MdExpandMore} from "react-icons/md";
 
 export function PlayerSelectSection({onChange, playerIdValue, initialCashValue, isEditMode, currentPlayerName}) {
     const {gameId} = useParams()
-    const selectPlayerId = useId();
-    const balanceId = useId();
+    const id = useId();
     const [maskedValue, setMaskedValue] = useState("");
     const [players, setPlayers] = useState([]);
 
@@ -28,7 +35,7 @@ export function PlayerSelectSection({onChange, playerIdValue, initialCashValue, 
 
     useEffect(() => {
         if (initialCashValue !== null && initialCashValue !== undefined) {
-            setMaskedValue(initialCashValue.toString());
+            setMaskedValue(Number(initialCashValue).toFixed(2));
         } else {
             setMaskedValue("");
         }
@@ -48,37 +55,65 @@ export function PlayerSelectSection({onChange, playerIdValue, initialCashValue, 
 
     return (
         (!isLoadingPlayersNotINGame || isEditMode) && (
-            <FormWrapper>
-                <InputWrapper>
-                    <label htmlFor={selectPlayerId}>Jogador<span> *</span></label>
-                    <Select
-                        id={selectPlayerId}
-                        placeholder="Selecionar Jogador"
-                        onChange={(selectedPlayerId) => onChange("playerId", selectedPlayerId)}
-                        style={{ width: '100%' }}
-                        notFoundContent={isEditMode ? "" : "Todos jogadores já estão na partida ou nenhum jogador cadastrado!"}
-                        options={players.map(player => ({
-                            label: player.name,
-                            value: player.id,
-                        }))}
-                        value={playerIdValue}
-                        disabled={isEditMode}
-                    />
-                </InputWrapper>
-                <InputWrapper>
-                    <label htmlFor={balanceId}>Banca Inicial<span> *</span></label>
-                    <Input
-                        name={"initialCash"}
-                        inputMode={"decimal"}
-                        id={balanceId}
-                        addonBefore="R$"
-                        placeholder={"10.00"}
-                        value={maskedValue}
-                        onChange={handleBalanceChange}
-                    />
-                </InputWrapper>
-            </FormWrapper>
+            <FormSection>
+                <h3>Adição de Jogador</h3>
+                <FormFieldsContainer>
+                    <div>
+                        <Label htmlFor={id + '-player-select'}>Selecione Jogador</Label>
+                        <SelectWrapper>
+                            <SelectInput
+                                id={id + '-player-select'}
+                                placeholder="Selecionar Jogador"
+                                onChange={(event) => onChange("playerId", event.target.value)}
+                                value={playerIdValue}
+                                disabled={isEditMode}
+                            >
+                                <option value="" disabled>Selecione Jogador</option>
+                                {players.map(player => (
+                                    <option key={player.id} value={player.id}>{player.name}</option>
+                                ))}
+                            </SelectInput>
+                            <SelectArrow>
+                                <MdExpandMore size={24} />
+                            </SelectArrow>
+                        </SelectWrapper>
+
+                    </div>
+                    <div>
+                        <Label htmlFor={id + '-player-balance'}>Banca Inicial (R$)</Label>
+                        <NumberInputStyled
+                            name={"initialCash"}
+                            inputMode={"decimal"}
+                            id={id + '-player-balance'}
+                            placeholder={"Digite o valor da banca inicial"}
+                            value={maskedValue}
+                            onChange={handleBalanceChange}
+                        />
+                    </div>
+                </FormFieldsContainer>
+            </FormSection>
         )
 
     )
 }
+
+// <FormSection>
+//     <Label>
+//         <LabelText>Player</LabelText>
+//         <SelectInput value={selectedPlayer} onChange={e => setSelectedPlayer(e.target.value)}>
+//             <option value="">Select Player</option>
+//             {dummyPlayerData.players.map(player => (
+//                 <option key={player.id} value={player.id}>{player.name}</option>
+//             ))}
+//         </SelectInput>
+//     </Label>
+//     <Label>
+//         <LabelText>Initial Balance</LabelText>
+//         <NumberInputStyled
+//             type="number"
+//             placeholder="Enter initial balance"
+//             value={initialBalance}
+//             onChange={e => setInitialBalance(e.target.value)}
+//         />
+//     </Label>
+// </FormSection>
