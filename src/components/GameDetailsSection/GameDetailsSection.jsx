@@ -1,43 +1,60 @@
-import {GameDetailsWrapper, InfoItem, InfoList} from "./styles.js";
+import {InfoItem, InfoItemWideValue, InfoList, StatusBadge, ValueText} from "./styles.js";
 import {formatNumberToBRL} from "../../utils/numberUtils.js";
-import {formatDate} from "../../utils/dateUtils.js";
+import {getMonthAndDay} from "../../utils/dateUtils.js";
+import React from "react";
+import {Section} from "../Section/Section.jsx";
 
 export function GameDetailsSection({game}) {
-    const isDueDateInFuture = new Date(game.dueDate) > new Date();
-    const dueDateStyle = {
-        color: isDueDateInFuture ? 'inherit' : 'red'
-    };
+    const isDueDatePast = new Date(game.dueDate) < new Date();
 
+    let statusText;
+    let statusType; // 'finished', 'overdue', 'inProgress'
+
+    if (game.isFinished) {
+        statusText = "Finalizado";
+        statusType = "finished";
+    } else if (isDueDatePast) {
+        statusText = "Vencida";
+        statusType = "overdue";
+    } else {
+        statusText = "Em progresso";
+        statusType = "inProgress";
+    }
 
     return (
-        <GameDetailsWrapper>
-            <h2>Informações</h2>
+        <Section title={"Informações da Partida"}>
             <InfoList>
                 <InfoItem>
-                    <p>Partida Finalizada</p>
-                    <h3>{game.isFinished ? "Sim" : "Não"}</h3>
+                    <p>Status</p>
+                    <StatusBadge $status={statusType}>{statusText}</StatusBadge>
                 </InfoItem>
                 <InfoItem>
                     <p>Data de Vencimento</p>
-                    <h3 style={dueDateStyle}>{formatDate(game.dueDate)}</h3>
+                    <ValueText>
+                        {getMonthAndDay(game.dueDate)}
+                    </ValueText>
                 </InfoItem>
                 <InfoItem>
-                    <p>Saldo geral:</p>
-                    <h3>{game.totalBalance}</h3>
+                    <p>Saldo Geral</p>
+                    <ValueText>{formatNumberToBRL(game.totalBalance)}</ValueText>
                 </InfoItem>
                 <InfoItem>
                     <p>Prêmio Total</p>
-                    <h3>{formatNumberToBRL(game.totalPrize)}</h3>
+                    <ValueText>
+                        {formatNumberToBRL(game.totalPrize)}
+                    </ValueText>
                 </InfoItem>
                 <InfoItem>
-                    <p>Participantes</p>
-                    <h3>{game.totalPlayers}</h3>
+                    <p>Jogadores</p>
+                    <ValueText>
+                        {game.totalPlayers}
+                    </ValueText>
                 </InfoItem>
-                <InfoItem>
-                    <p>Observações</p>
-                    <h3>{game.observation}</h3>
-                </InfoItem>
+                <InfoItemWideValue>
+                    <p>Observação</p>
+                    <ValueText>{game.observation}</ValueText>
+                </InfoItemWideValue>
             </InfoList>
-        </GameDetailsWrapper>
+        </Section>
     )
 }

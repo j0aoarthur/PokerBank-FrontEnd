@@ -1,16 +1,13 @@
-import {SectionTitle} from "../SectionTitle/SectionTitle.jsx";
-import {FaRegCircleXmark} from "react-icons/fa6";
-import {InfoContainer, InfoWrapper, ParticipantItem, ParticipantsList, ParticipantsSectionContainer} from "./styles.js";
-import {LuCircleMinus, LuCirclePlus} from "react-icons/lu";
-import {useEffect, useState} from "react";
+import {PlayerBalance, PlayerDetails, PlayerInfo, PlayerItemCard, PlayerList} from "./styles.js";
+import React, {useEffect, useState} from "react";
 import {useQuery} from "@tanstack/react-query";
 import {getPlayersOfGame} from "../../services/apiService.js";
 import {formatNumberToBRL} from "../../utils/numberUtils.js";
-import {FaRegCheckCircle} from "react-icons/fa";
 import {useNavigate} from "react-router-dom";
+import {Section} from "../Section/Section.jsx";
 
 export function GameParticipantsSection({gameId}) {
-    const [participants, setParticipants] = useState([]);
+    const [players, setPlayers] = useState([]);
     const navigate = useNavigate();
 
     const {data} = useQuery({
@@ -20,40 +17,35 @@ export function GameParticipantsSection({gameId}) {
     })
 
     // Função para navegar para a edição do jogador na partida
-    const handleParticipantClick = (participantId) => {
-        navigate(`/game/${gameId}/player/${participantId.playerId}/edit`);
+    const handleParticipantClick = (player) => {
+        navigate(`/game/${gameId}/player/${player.playerId}/edit`);
     };
 
     useEffect(() => {
         if (data) {
-            setParticipants(data);
+            setPlayers(data);
         }
     }, [data]);
 
 
     return (
-        <ParticipantsSectionContainer>
-            <SectionTitle title={"Jogadores"} subtitle={"Adicionar jogador"} subtitleTo={`/game/${gameId}/player`}/>
-            <ParticipantsList>
-                {participants.map(participant => {
-                    const IconComponent = participant.paymentSituation === "PAY" ? LuCircleMinus : LuCirclePlus;
-                    const iconColor = participant.paymentSituation === "PAY" ? "var(--red-color)" : "var(--green-color)";
+        <Section title={`Jogadores (${players.length})`} subtitle={"Adicionar jogador"} subtitleTo={`/game/${gameId}/player`}>
+            <PlayerList>
+                {players.map((player, index) => {
                     return (
-                        <ParticipantItem key={participant.playerId} onClick={() => handleParticipantClick(participant)}
-                                         style={{cursor: 'pointer'}}>
-                            <InfoContainer>
-                                <IconComponent color={iconColor} />
-                                <InfoWrapper $paymentSituation={participant.paymentSituation}>
-                                    <h3>{participant.playerName}</h3>
-                                    <p>Saldo: <span>{formatNumberToBRL(participant.balance)}</span></p>
-                                </InfoWrapper>
-                            </InfoContainer>
-                            {participant.paid ? <FaRegCheckCircle size={20}/> : <FaRegCircleXmark size={20}/>}
-                        </ParticipantItem>
+                        <PlayerItemCard key={index} onClick={() => handleParticipantClick(player)}>
+                            <PlayerInfo>
+                                <PlayerDetails $paid={player.paid}>
+                                    <p>{player.playerName}</p>
+                                    <p>{player.paid ? "Pago" : "Não Pago"}</p>
+                                </PlayerDetails>
+                            </PlayerInfo>
+                            <PlayerBalance
+                                $paymentSituation={player.paymentSituation}>{formatNumberToBRL(player.balance)}</PlayerBalance>
+                        </PlayerItemCard>
                     )
                 })}
-
-            </ParticipantsList>
-        </ParticipantsSectionContainer>
+            </PlayerList>
+        </Section>
     )
 }

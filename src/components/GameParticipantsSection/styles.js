@@ -1,66 +1,48 @@
 import styled from "styled-components";
 
-export const ParticipantsSectionContainer = styled.div`
+export const PlayerList = styled.div`
     display: flex;
     flex-direction: column;
+    gap: calc(0.75 * var(--space-4));
+`;
+
+export const PlayerItemCard = styled.div`
+    display: flex;
     align-items: center;
-    gap: 15px;
-
-    & > h2 {
-        color: var(--text-black-color);
-        text-align: center;
-        font-size: 20px;
-        font-weight: 700;
-    }
-`
-
-export const ParticipantsList = styled.div`
-    display: flex;
-    align-self: stretch;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-`
-
-export const ParticipantItem = styled.div`
-    display: flex;
-    padding: 15px 18px;
     justify-content: space-between;
-    align-items: center;
-    align-self: stretch;
+    gap: var(--space-4); // Tailwind: gap-4
+    background-color: var(--panel-background-color); // Tailwind: bg-[#F7F9FC]
+    padding: var(--space-3); // Tailwind: p-3
+    border-radius: var(--rounded-lg); // Tailwind: rounded-lg
+    border: 1px solid var(--panel-border-color); // Tailwind: border border-[#E8EDF2]
+    transition: background-color 0.2s ease-in-out; // Tailwind: transition-colors
+    cursor: pointer;
 
-    border-radius: 10px;
-    background: var(--white-color);
-    box-shadow: 2px 2px 5px -1px var(--shadow-color);
-`
+    &:hover {
+        background-color: var(--panel-border-color); // Tailwind: hover:bg-[#E8EDF2]
+    }
+`;
 
-export const InfoContainer = styled.div`
+export const PlayerInfo = styled.div`
     display: flex;
     align-items: center;
-    gap: 15px;
-`
+    gap: var(--space-3); // Tailwind: gap-3
+`;
 
-
-export const InfoWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 2px;
-    
-    & > h3 {
-        color: var(--text-black-color);
-        font-size: 14px;
-        font-weight: 700;
+export const PlayerDetails = styled.div`
+    p:first-child { // Player Name
+        font-size: var(--text-base); // Tailwind: text-base
+        font-weight: var(--font-medium); // Tailwind: font-medium
+        color: var(--primary-color-dark); // Tailwind: text-[#2D3748]
     }
-    
-    & > p {
-        color: var(--text-gray-color);
-        font-size: 12px;
-        font-weight: 500;
-
-        & > span {
-            color: ${({ $paymentSituation }) => ($paymentSituation === "PAY" ? "red" : "green")};
-        }
+    p:last-child { // Player Status (Paid/Unpaid)
+        font-size: calc(0.75 * var(--text-sm));
+        color: ${props => props.$paid ?  'var(--secondary-color-gray)' : 'var(--accent-red-color)'};
     }
-`
+`;
+
+export const PlayerBalance = styled.p`
+  font-size: var(--text-base); // Tailwind: text-base
+  font-weight: var(--font-semibold); // Tailwind: font-semibold
+  color: ${({ $paymentSituation }) => ($paymentSituation === "PAY" ? 'var(--accent-red-color)' : 'var(--accent-green-color)')};
+`;
