@@ -10,11 +10,20 @@ export const getTopRanking = async () => {
     return response.data
 }
 
-export const getAllGames = async () => {
-    const response = await axiosInstance.get("/games")
+export const getAllGames = async ({page, size}) => {
+    const response = await axiosInstance.get("/games", {
+        params: {
+            page,
+            size,
+        }
+    });
     return response.data
 }
 
+export const getExpiredGames = async () => {
+    const response = await axiosInstance.get("/payment/expired-games")
+    return response.data
+}
 export const getLatestGames = async () => {
     const response = await axiosInstance.get("/games/latest")
     return response.data

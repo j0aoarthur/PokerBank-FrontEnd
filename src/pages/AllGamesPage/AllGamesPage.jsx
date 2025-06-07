@@ -1,71 +1,142 @@
-// src/pages/AllGamesPage/AllGamesPage.jsx
-import React, {useEffect, useState} from "react";
-import {useQuery} from "@tanstack/react-query";
-import {useNavigate} from "react-router-dom";
-import {MainHeader} from "../../components/MainHeader/MainHeader.jsx";
-import {PageTitle} from "../../components/PageTitle/PageTitle.jsx";
-import {NavigationBar} from "../../components/NavigationBar/NavigationBar.jsx";
-import {getAllGames} from "../../services/apiService.js";
-import {useTitle} from "../../utils/useTitle.js";
-import {formatDate, getDayOfWeek} from "../../utils/dateUtils.js";
-import {AllGamesPageContainer, GameInfo, GameItemStyled, GamesList} from "./styles.js";
-import {FaAngleRight} from "react-icons/fa6";
+import React, {useState} from 'react';
+import {Pagination} from 'antd';
+import {MdOutlineChevronRight} from 'react-icons/md';
+import {useNavigate} from 'react-router-dom';
+import {useQuery} from '@tanstack/react-query';
 
-export function AllGamesPage({ title }) {
-    useTitle(title);
+import {
+    AllGamesPageContainer,
+    ChevronIcon,
+    GameDateText,
+    GameInfo,
+    GameItemCard,
+    GamesListContainer,
+    GamesSection,
+    GameStatusText,
+    HrDivider,
+    MainContent,
+    PageSubtitle,
+    PageTitle,
+    PaginationWrapper
+} from './styles';
+import {PageHeader} from "../../components/PageHeader/PageHeader.jsx";
+import {getAllGames, getExpiredGames} from "../../services/apiService.js";
+import {formatFullDate} from "../../utils/dateUtils.js";
+import {useTitle} from '../../utils/useTitle.js';
+import {Section} from "../../components/Section/Section.jsx";
+
+const GameItem = ({ game }) => {
     const navigate = useNavigate();
-    const [games, setGames] = useState([]);
+    let statusText;
 
-    const { data: fetchedGames, isLoading, error } = useQuery({
-        queryKey: ["allGames"],
-        queryFn: getAllGames,
-    });
-
-    useEffect(() => {
-        if (fetchedGames) {
-            // Ordenar por data, mais recentes primeiro, se a API não o fizer
-            const sortedGames = [...fetchedGames].sort((a, b) => new Date(b.date) - new Date(a.date));
-            setGames(sortedGames);
-        }
-    }, [fetchedGames]);
-
-    if (error) {
-        return (
-            <AllGamesPageContainer>
-                <MainHeader />
-                <PageTitle text="Todas as Partidas" />
-                <p style={{ color: 'var(--red-color)', textAlign: 'center' }}>
-                    Erro ao carregar as partidas: {error.message}
-                </p>
-                <NavigationBar activePage="game" />
-            </AllGamesPageContainer>
-        );
+    if (game.isFinished) {
+        statusText = "Finalizada";
+    } else if (new Date(game.dueDate) < new Date() && !game.isFinished) {
+        statusText = "Vencida";
+    } else {
+        statusText = "Em aberto";
     }
 
     return (
+        <GameItemCard onClick={() => navigate(`/game/${game.id}`)}>
+            <GameInfo>
+                <GameDateText>{formatFullDate(game.date)}</GameDateText>
+                <GameStatusText $status={statusText === "Vencida"}>{statusText}</GameStatusText>
+            </GameInfo>
+            <ChevronIcon>
+                <MdOutlineChevronRight />
+            </ChevronIcon>
+        </GameItemCard>
+    );
+};
+
+export function AllGamesPage({ title }) {
+    useTitle(title);
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(10);
+
+    const { data: apiResponse, error: errorAllGames } = useQuery({
+        queryKey: ['allGames', currentPage, pageSize],
+        queryFn: () => getAllGames({ page: currentPage - 1, size: pageSize }),
+        keepPreviousData: true,
+    });
+
+    const { data: expiredGamesData, error: errorExpired } = useQuery({
+        queryKey: ['expiredGames'],
+        queryFn: getExpiredGames,
+    });
+
+    const allGames = apiResponse?.content || [];
+    const totalPages = apiResponse?.totalPages || 0;
+    const totalGames = apiResponse?.totalElements || 0;
+    const expiredGames = expiredGamesData || [];
+
+    const handlePageChange = (page, newPageSize) => {
+        setCurrentPage(page);
+        if (newPageSize && newPageSize !== pageSize) {
+            setPageSize(newPageSize);
+        }
+    };
+
+    const getShowingRange = () => {
+        if (totalGames === 0) return "Nenhuma partida encontrada";
+        const startItem = (currentPage - 1) * pageSize + 1;
+        const endItem = Math.min(currentPage * pageSize, totalGames);
+        return `Mostrando ${startItem}-${endItem} de ${totalGames} partida(s)`;
+    };
+
+    return (
         <AllGamesPageContainer>
-            <MainHeader />
-            <PageTitle text="Todas as Partidas" subtitle={games.length > 0 ? `${games.length} partida(s) encontrada(s)` : ""} />
+            <PageHeader title={"PokerBank"} />
+            <MainContent>
+                <GamesSection>
+                    <PageTitle>{title}</PageTitle>
+                    <PageSubtitle>
+                        {!errorAllGames ? getShowingRange() : ""}
+                    </PageSubtitle>
 
-            {games.length === 0 && !isLoading && (
-                <p style={{ textAlign: 'center', marginTop: '20px' }}>Nenhuma partida encontrada.</p>
-            )}
+                    {errorAllGames && <p style={{ textAlign: 'center', marginTop: '20px', color: 'red' }}>Erro ao carregar partidas.</p>}
 
-            <GamesList>
-                {games.map((game) => (
-                    <GameItemStyled key={game.id} onClick={() => navigate(`/game/${game.id}`)}>
-                        <GameInfo>
-                            <h3>{getDayOfWeek(game.date)}</h3>
-                            <p>{formatDate(game.date)}</p>
-                            <p>Status: {game.isFinished === true ? "Finalizada" : (new Date(game.dueDate) < new Date() ? "Vencida" : "Em aberto")}</p>
-                        </GameInfo>
-                        <div style={{display: "flex", alignItems: "center", gap: "10px"}}>
-                            <FaAngleRight opacity={0.3} size={20} />
-                        </div>
-                    </GameItemStyled>
-                ))}
-            </GamesList>
-            <NavigationBar activePage="games" />
+                    {!errorAllGames && allGames.length > 0 && (
+                        <GamesListContainer>
+                            {allGames.map(game => (
+                                <GameItem key={game.id} game={game} />
+                            ))}
+                        </GamesListContainer>
+                    )}
+                    {!errorAllGames && allGames.length === 0 && totalGames === 0 && (
+                        <p style={{ textAlign: 'center', marginTop: '20px' }}>Nenhuma partida encontrada.</p>
+                    )}
+
+                    {!errorAllGames && totalPages > 1 && (
+                        <PaginationWrapper>
+                            <Pagination
+                                current={currentPage}
+                                pageSize={pageSize}
+                                total={totalGames}
+                                onChange={handlePageChange}
+                                showSizeChanger={true}
+                                pageSizeOptions={['5', '10', '20', '50']}
+                            />
+                        </PaginationWrapper>
+                    )}
+                </GamesSection>
+
+                <HrDivider />
+
+                <Section title={"Partidas Vencidas"}>
+                    {errorExpired && <p style={{ textAlign: 'center', marginTop: '20px', color: 'red' }}>Erro ao carregar partidas vencidas.</p>}
+                    {!errorExpired && expiredGames.length > 0 && (
+                        <GamesListContainer>
+                            {expiredGames.map(game => <GameItem key={`expired-${game.id}`} game={game} />)}
+                        </GamesListContainer>
+                    )}
+                    {!errorExpired && expiredGames.length === 0 && (
+                        <p style={{ textAlign: 'center', marginTop: '20px' }}>Nenhuma partida vencida encontrada.</p>
+                    )}
+                </Section>
+            </MainContent>
         </AllGamesPageContainer>
     );
 }

@@ -5,71 +5,115 @@ export const AllGamesPageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  align-self: stretch;
   gap: 25px;
   width: 100%;
 `;
 
-export const GamesList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 15px; // Espaçamento entre os itens da lista
+export const MainContent = styled.main`
   align-self: stretch;
-  width: 100%;
-  padding: 0 5px; // Pequeno padding lateral se necessário
 `;
 
-export const GameItemStyled = styled.div`
+export const PageTitle = styled.h1`
+  color: var(--primary-color-dark); // .text-main
+  font-size: var(--text-3xl);
+  font-weight: var(--font-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: -0.01em; // tracking-tight
+  margin-bottom: var(--space-1);
+`;
+
+export const PageSubtitle = styled.p`
+  color: var(--secondary-color-gray); // .text-secondary
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  line-height: var(--leading-normal);
+  margin-bottom: var(--space-8);
+`;
+
+export const GamesListContainer = styled.div`
   display: flex;
-  padding: 15px 18px;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: var(--space-4); // space-y-4
+`;
+
+export const GameItemCard = styled.div`
+  display: flex;
   align-items: center;
-  align-self: stretch;
-  background: var(--white-color);
-  border-radius: 15px;
-  box-shadow: 0 2px 4px var(--shadow-color); // Sombra sutil como em outros elementos
+  gap: var(--space-4);
+  background-color: var(--panel-background-color, #f7f9fc); // .bg-secondary
+  padding: var(--space-4);
+  border-radius: var(--rounded-xl);
+  border: 1px solid var(--panel-border-color, #e8edf2); // .border-divider
+  box-shadow: var(--shadow-sm, 0 1px 2px 0 rgba(0,0,0,0.05));
   cursor: pointer;
-  transition: filter 0.2s ease-in-out;
-
-  &:hover {
-    filter: brightness(0.95);
-  }
-
-  &:active {
-    filter: brightness(0.9);
-  }
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 `;
 
 export const GameInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 6px;
+  flex: 1;
+`;
 
-  h3 {
-    color: var(--text-black-color);
-    font-size: 16px;
-    font-weight: 600;
+export const GameDateText = styled.p`
+  color: var(--primary-color-dark); // .text-main
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  line-height: var(--leading-tight);
+`;
+
+export const GameStatusText = styled.p`
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: ${props => props.$status ? 'var(--accent-red-color)' : 'var(--primary-color-dark)'};
+`;
+
+export const ChevronIcon = styled.span`
+  color: var(--primary-color-dark); // .text-main
+  opacity: 0.75;
+  transition: opacity 0.15s ease-in-out;
+
+  ${GameItemCard}:hover & {
+    opacity: 1;
   }
 
-  p {
-    color: var(--text-light-gray-color);
-    font-size: 12px;
-    font-weight: 400;
+  svg { // For react-icons
+    font-size: var(--text-3xl, 1.875rem) !important; // Ensure size for Material Symbols
+    display: block;
   }
 `;
 
-export const GameStats = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 4px;
-    font-size: 12px;
-    color: var(--text-gray-color);
+export const GamesSection = styled.section`
+  margin-bottom: var(--space-8);
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+`;
 
-    .total-prize {
-        font-weight: 500;
-        color: var(--green-color);
+// Styles for Ant Design Pagination wrapper
+export const PaginationWrapper = styled.div`
+  margin-top: var(--space-8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  // Minor adjustments to antd pagination if needed, but generally rely on antd's styling.
+  // Example: customizing active page color (use antd's ConfigProvider for deeper themeing)
+  .ant-pagination-item-active {
+    background-color: var(--primary-color-dark, #2D3748);
+    border-color: var(--primary-color-dark, #2D3748);
+    a {
+      color: var(--white-color, #FFFFFF);
     }
+  }
+  .ant-pagination-item-active:hover {
+    background-color: var(--primary-button-hover-bg, #1A202C);
+    border-color: var(--primary-button-hover-bg, #1A202C);
+    a {
+      color: var(--white-color, #FFFFFF);
+    }
+  }
+`;
+
+export const HrDivider = styled.div`
+  border-top: 1px solid var(--panel-border-color, #E8EDF2);
+  margin: var(--space-8) 0; // my-8
 `;
