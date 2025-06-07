@@ -1,6 +1,6 @@
 import {HeaderWrapper, LogoImage, PageTitle, SettingsButton} from "./styles.js";
-import {MdSettings} from "react-icons/md";
 import logo3 from "../../assets/images/logo3.png";
+import {TbLogout} from "react-icons/tb";
 
 export function HomeHeader({onSettingsClick}) {
     return (
@@ -8,7 +8,7 @@ export function HomeHeader({onSettingsClick}) {
             <LogoImage alt="PokerBank Logo" src={logo3} />
             <PageTitle>PokerBank</PageTitle>
             <SettingsButton onClick={onSettingsClick} aria-label="Settings">
-                <MdSettings size={24} />
+                <TbLogout size={32} />
             </SettingsButton>
         </HeaderWrapper>
     )

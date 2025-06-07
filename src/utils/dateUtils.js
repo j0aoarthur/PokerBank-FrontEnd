@@ -35,8 +35,7 @@ export function getLongDate(dateString) {
     const [year, month, day] = dateString.split('-');
     const date = new Date(year, month - 1, day);
     const options = { day: 'numeric', month: 'long', year: 'numeric' };
-    const formattedDate = date.toLocaleDateString('pt-BR', options);
-    return formattedDate;
+    return date.toLocaleDateString('pt-BR', options);
 }
 
 
