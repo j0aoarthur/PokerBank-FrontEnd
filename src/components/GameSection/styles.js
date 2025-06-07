@@ -1,54 +1,40 @@
 import styled from "styled-components";
 
-export const GameSectionContainer = styled.section`
+export const ItemList = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 24px;
-    align-self: stretch;
-`
+    gap: calc(0.75 * var(--space-4)); // space-y-3 (0.75rem)
+`;
 
-export const GameList = styled.div`
+export const CardItem = styled.div`
+    background-color: var(--panel-background-color); // bg-[#F7F9FC]
+    padding: var(--space-4); // p-4
+    border-radius: var(--rounded-lg); // rounded-lg
     display: flex;
-    max-height: 200px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    align-self: stretch;
-`
-
-export const GameItem = styled.div`
-    display: flex;
-    padding: 15px 18px;
-    justify-content: space-between;
     align-items: center;
-    align-self: stretch;
-    background: var(--white-color);
-    border-radius: 15px;
-    
-    &:active {
-        filter: brightness(0.9);
-    }
-`
+    justify-content: space-between;
+    box-shadow: var(--shadow-md-custom); // shadow-md
+    border: 1px solid var(--panel-border-color); // border border-[#E8EDF2]
+    transition: background-color 0.2s;
+    cursor: pointer;
 
-export const GameItemInfo = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 6px;
-    
-    & > h3 {
-        color: var(--text-black-color);
-        leading-trim: both;
-        font-size: 16px;
-        font-weight: 600;
+    &:hover {
+        background-color: var(--panel-border-color); // hover:bg-[#E8EDF2]
     }
-    
-    & > p {
-        color: var(--text-light-gray-color);
-        leading-trim: both;
-        font-size: 11px;
-        font-weight: 400;
+
+    .material-icons, svg {
+        color: var(--primary-color-dark); // text-[#2D3748]
+        font-size: var(--text-2xl);
     }
-`
+`;
+
+export const ItemTextMain = styled.p`
+  color: var(--primary-color-dark); // text-[#2D3748]
+  font-weight: var(--font-medium); // font-medium
+`;
+
+export const ItemTextSecondary = styled.p`
+  color: var(--secondary-color-gray); // text-[#5A6A7B]
+  font-size: var(--text-sm); // text-sm
+`;
+

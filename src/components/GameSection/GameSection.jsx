@@ -1,11 +1,11 @@
-import {SectionTitle} from "../SectionTitle/SectionTitle.jsx";
-import {FaAngleRight} from "react-icons/fa6";
-import {GameItem, GameItemInfo, GameList, GameSectionContainer} from "./styles.js";
+import {CardItem, ItemList, ItemTextMain, ItemTextSecondary} from "./styles.js";
 import {useQuery} from "@tanstack/react-query";
 import {getLatestGames} from "../../services/apiService.js";
-import {useEffect, useState} from "react";
-import {formatDate, getDayOfWeek} from "../../utils/dateUtils.js";
+import React, {useEffect, useState} from "react";
+import {getDayOfWeek, getLongDate} from "../../utils/dateUtils.js";
 import {useNavigate} from "react-router-dom";
+import {Section} from "../Section/Section.jsx";
+import {MdChevronRight} from "react-icons/md";
 
 export function GameSection() {
     const [games, setGames] = useState([]);
@@ -26,20 +26,19 @@ export function GameSection() {
 
 
     return (
-        <GameSectionContainer>
-            <SectionTitle title={"Últimas partidas"} subtitle={"Ver todas"} subtitleTo={"/games"}/>
-            <GameList>
-                {games.map((game) => (
-                    <GameItem key={game.id} onClick={() => navigate(`/game/${game.id}`)} >
-                        <GameItemInfo>
-                            <h3>{getDayOfWeek(game.date)}</h3>
-                            <p>{formatDate(game.date)}</p>
-                        </GameItemInfo>
-                        <FaAngleRight opacity={0.2}/>
-                    </GameItem>
+        <Section title={"Últimas partidas"} subtitle={"Ver todas"} subtitleTo={"/games"}>
+            <ItemList>
+                {games.map(game => (
+                    <CardItem key={game.id} onClick={() => navigate(`/game/${game.id}/`)}>
+                        <div>
+                            <ItemTextMain>{getDayOfWeek(game.date)}</ItemTextMain>
+                            <ItemTextSecondary>{getLongDate(game.date)}</ItemTextSecondary>
+                        </div>
+                        <MdChevronRight />
+                    </CardItem>
                 ))}
-
-            </GameList>
-        </GameSectionContainer>
+            </ItemList>
+        </Section>
     )
 }
+

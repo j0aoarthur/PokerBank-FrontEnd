@@ -1,42 +1,28 @@
 import styled from "styled-components";
 
-export const RankingWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 24px;
-    align-self: stretch;
-    width: 100%;
-    
-`
-
 export const PlayerRankingList = styled.div`
     display: flex;
-    padding: 10px 18px;
     flex-direction: column;
-    justify-content: center;
-    gap: 20px;
-    align-self: stretch;
-
-    border-radius: 15px;
-    background: var(--white-color);
+    width: 100%;
+    gap: calc(0.75 * var(--space-4));
 `
 
-export const PlayerRankingItem = styled.div`
+export const CardItem = styled.div`
     display: flex;
-    height: fit-content;
-    justify-content: space-between;
     align-items: center;
-    align-self: stretch;
-
+    justify-content: space-between;
+    background-color: var(--panel-background-color); // bg-[#F7F9FC]
+    padding: var(--space-3); // p-3
+    border-radius: var(--rounded-lg); // rounded-lg
+    border: 1px solid var(--panel-border-color); // border border-[#E8EDF2]
+    box-shadow: var(--shadow-md-custom); // shadow-md
+    width: 100%;
 `
 
 export const PlayerInfo = styled.div`
     display: flex;
-    justify-content: center;
-    flex-direction: row;
     align-items: center;
-    gap: 10px;
+    gap: var(--space-3);
 `
 
 export const PlayerPosition = styled.div`
@@ -46,9 +32,8 @@ export const PlayerPosition = styled.div`
     align-items: center;
     justify-content: center;
     
-    & > img {
-        width: 100%;
-        height: 100%;
+    & > svg {
+        font-size: var(--text-2xl-icon);
     }
     
     & > h3 {
@@ -57,36 +42,21 @@ export const PlayerPosition = styled.div`
         font-style: normal;
         font-weight: 400;
     }
-    
-    
-    
 `
 
-export const PlayerDetails = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2px;
-    
-    & > h3 {
-        color: var(--text-black-color);
-        font-size: 14px;
-        font-weight: 600;
-    }
-    
-    & > p{
-        color: var(--text-light-gray-color);
-        font-size: 11px;
-        font-style: normal;
-        font-weight: 400;
-    }
+export const PlayerNetBalance = styled.p`
+    font-size: var(--text-sm);
+    font-weight: var(--font-bold);
+    color: ${props => props.$color ? 'var(--accent-green-color)' : 'var(--accent-red-color)'};
 `
 
+export const ItemTextMain = styled.p`
+    color: var(--primary-color-dark); // text-[#2D3748]
+    font-weight: var(--font-medium);
+`;
 
-export const PlayerNetBalance = styled.div`
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
+export const ItemTextSecondary = styled.p`
+    font-size: var(--text-xs);
+    color: var(--secondary-color-gray);
+    
 `
