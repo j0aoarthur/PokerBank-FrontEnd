@@ -1,6 +1,9 @@
 import {QueryClient, QueryClientProvider, useIsFetching} from "@tanstack/react-query";
+import '@ant-design/v5-patch-for-react-19';
 import {Outlet} from "react-router-dom";
 import {Spinner} from "./components/Spinner/Spinner.jsx";
+import {ConfigProvider} from "antd";
+import locale from "antd/locale/pt_BR";
 
 function AppContent() {
     const isFetching = useIsFetching();
@@ -8,7 +11,7 @@ function AppContent() {
     return (
         <>
             {isFetching > 0 && (
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100dvh' }}>
                     <Spinner/>
                 </div>
             )}
@@ -27,7 +30,9 @@ function App() {
 
     return (
         <QueryClientProvider client={client}>
-            <AppContent />
+            <ConfigProvider locale={locale}>
+                <AppContent />
+            </ConfigProvider>
         </QueryClientProvider>
     );
 }

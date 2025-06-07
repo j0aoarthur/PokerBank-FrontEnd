@@ -1,47 +1,39 @@
 import styled from "styled-components";
 
-export const BottomBarContainer = styled.div`
+export const FooterNav = styled.nav`
     display: flex;
-    width: 85%;
-    height: 49px;
-    padding: 15px 25px;
-    justify-content: space-between;
-    align-items: center;
-    align-self: center;
-
-    position: fixed;
-    bottom: 20px;
-
-    border-radius: 20px;
-    background: var(--black-color);
-    box-shadow: 0 4px 4px 0 var(--shadow-color);
+    margin: var(--remove-margin);
+    gap: var(--space-2);
+    background-color: var(--primary-color-dark);
+    padding: var(--space-2) var(--space-2) env(safe-area-inset-bottom, 0.75rem);
 `;
 
-export const IconWrapper = styled.div.attrs(() => ({}))`
-    padding: 5px;
+export const NavLink = styled.a`
+    flex: 1;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    position: relative;
+    justify-content: flex-end;
+    gap: calc(0.5 * var(--space-unit));
+    padding: var(--space-1) 0;
+    border-radius: var(--rounded-lg);
+    text-decoration: none;
+    transition: background-color 0.15s;
+    color: ${props => props.$active ? 'var(--white-color)' : 'var(--secondary-color-gray, #5A6A7B)'};
+    background-color: ${props => props.$active ? 'var(--nav-active-bg, rgba(74, 85, 104, 0.5))' : 'transparent'};
 
-    & > * {
-        font-size: 25px;
-        color: var(--text-white-color);
-        cursor: pointer;
+    &:hover {
+        background-color: ${props => props.$active ? 'var(--nav-active-hover-bg, rgba(74, 85, 104, 0.7))' : 'var(--nav-active-bg, rgba(74, 85, 104, 0.5))'};
     }
 
-    &::after {
-        content: '';
-        position: absolute;
-        bottom: -2px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 4px;
-        height: 4px;
-        border-radius: 50%;
-        background-color: white;
-        opacity: ${({ $active }) => ($active ? 1 : 0)};
-        transition: opacity 0.3s ease;
+    svg { // For react-icons
+        font-size: 24px;
+    }
+
+    p {
+        font-size: var(--text-xs);
+        font-weight: var(--font-medium);
+        line-height: var(--leading-normal);
     }
 `;
 
