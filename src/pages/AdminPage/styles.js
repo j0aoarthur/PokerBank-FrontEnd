@@ -7,66 +7,129 @@ export const AdminPageContainer = styled.div`
     gap: 30px;
     align-self: stretch;
     width: 100%;
-    padding-bottom: 70px;
-`; //
+`;
 
-export const AdminSection = styled.div`
+export const MainContent = styled.main`
+    align-self: stretch;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    align-self: stretch;
-    width: 100%;
-    padding: 20px;
+    gap: var(--space-5); // space-y-6
+`;
+
+export const Card = styled.div`
     background-color: var(--white-color);
-    border-radius: 15px;
-    box-shadow: 0 2px 4px var(--shadow-color);
-`; //
-
-export const FormWrapper = styled.div`
+    padding: var(--space-4);
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    align-self: stretch;
-`; //
+    gap: var(--space-3);
+    border-radius: var(--rounded-lg);
+    border: 1px solid var(--panel-border-color);
+`;
 
-export const InputWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-    align-self: stretch;
+export const Label = styled.label`
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--secondary-color-gray);
+    margin-bottom: var(--space-1);
+`;
 
-    & > label {
-        color: var(--text-black-color);
-        font-size: 14px;
-        font-weight: 500;
+export const InputField = styled.input`
+    width: 100%;
+    border-radius: var(--rounded-md); // rounded-md
+    border: 1px solid var(--panel-border-color);
+    background-color: var(--white-color);
+    color: var(--primary-color-dark);
+    padding: var(--space-2) var(--space-3); // py-2 px-3
+    font-size: var(--text-sm);
+    line-height: 1.5; // Ensure consistent height with padding
 
-        & > span {
-            color: var(--red-color);
-        }
+    &::placeholder {
+        color: var(--secondary-color-gray);
+    }
+
+    &:focus {
+        border-color: var(--primary-color-dark);
+        box-shadow: 0 0 0 1px var(--primary-color-dark);
+        outline: none;
+    }
+
+    &[type=number]::-webkit-outer-spin-button,
+    &[type=number]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    &[type=number] {
+        -moz-appearance: textfield;
     }
 `;
 
-export const ChipListContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 15px;
-    padding: 10px;
-    background-color: var(--background-color); //
-    border-radius: 8px;
+export const SubmitButton = styled.button`
+    width: 100%;
+    background-color: var(--primary-color-dark);
+    color: var(--white-color);
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--rounded-md);
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.15s;
+
+    &:hover {
+        background-color: rgba(45, 55, 72, 0.9); // hover:bg-opacity-90
+    }
 `;
 
-export const ChipListItem = styled.div`
+export const ListHeader = styled.h3`
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  color: var(--primary-color-dark);
+  margin-bottom: var(--space-2);
+`;
+
+export const ItemList = styled.ul`
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0; // space-y-2 applied by border logic
+    max-height: calc(8 * var(--space-6)); // max-h-32 (8 * 4px)
+    overflow-y: auto; // Allow scrolling if items exceed max height
+`;
+
+export const ListItem = styled.li`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 12px;
-    background-color: var(--white-color); //
-    border-radius: 6px;
-    box-shadow: 0 1px 2px var(--light-gray-color); //
-
-    & > span:first-child {
-        font-weight: 600;
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--panel-border-color);
+    &:last-child {
+        border-bottom: none;
     }
+`;
+
+export const ItemText = styled.span`
+  color: var(--primary-color-dark);
+  font-size: var(--text-sm);
+`;
+
+export const ChipInfoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+`;
+
+export const ChipColorSwatch = styled.div`
+  width: var(--space-4);
+  height: var(--space-4);
+  border-radius: var(--rounded-full);
+  background-color: ${props => props.color || '#ccc'};
+  border: 1px solid var(--light-gray-color);
+`;
+
+export const Hr = styled.hr`
+  border: none;
+  border-top: 1px solid var(--panel-border-color);
 `;
