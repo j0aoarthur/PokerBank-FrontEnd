@@ -1,42 +1,43 @@
 import styled from "styled-components";
 
-export const SectionWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
-    align-self: stretch;
-    
-    & > h2 {
-        color: var(--text-black-color);
-        text-align: center;
-        font-size: 20px;
-        font-weight: 600;
-    }
-`
-
 export const ChipsSection = styled.div`
     display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    gap: 25px;
-    align-self: stretch;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: calc(0.75 * var(--space-4)); // space-y-3
 `
 
 export const ChipSelect = styled.div`
     display: flex;
-    width: 130px;
-    flex-direction: column;
     align-items: center;
-    gap: 10px;
-    
-    & > h3 {
-        color: var(--text-black-color);
-        text-align: center;
-
-        font-size: 14px;
-        font-weight: 500;
-    }
+    justify-content: space-between;
+    gap: var(--space-4);
+    background-color: var(--panel-background-color);
+    padding: var(--space-4);
+    border-radius: var(--rounded-lg);
+    box-shadow: var(--shadow-default);
 `
+
+export const ChipInfo = styled.div`
+  display: flex;
+  align-items: center;
+  gap: calc(0.75 * var(--space-4)); // gap-3
+`;
+
+export const ChipColorIndicator = styled.div`
+  width: calc(0.75 * var(--space-4)); // w-3
+  height: calc(2 * var(--space-4));   // h-8
+  border-radius: var(--rounded-full);
+  background-color: ${props => props.color || 'var(--dark-text-primary)'};
+`;
+
+export const ChipName = styled.p`
+  color: var(--primary-color-dark);
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+`;
+
+export const ChipValue = styled.p`
+  color: var(--secondary-color-gray);
+  font-size: var(--text-sm);
+  font-weight: var(--font-normal);
+`;

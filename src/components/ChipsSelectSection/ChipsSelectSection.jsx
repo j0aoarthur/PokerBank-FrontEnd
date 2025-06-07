@@ -1,8 +1,11 @@
-import {NumberInput} from "../NumberInput/NumberInput.jsx";
-import {ChipSelect, ChipsSection, SectionWrapper} from "./styles.js";
+import {ChipQuantityControl} from "../ChipQuantityControl/ChipQuantityControl.jsx";
+import {ChipColorIndicator, ChipInfo, ChipName, ChipSelect, ChipsSection, ChipValue} from "./styles.js";
 import {getChips} from "../../services/apiService.js";
 import {useQuery} from "@tanstack/react-query";
 import capitalize from "antd/es/_util/capitalize.js";
+import React from "react";
+import {formatNumberToBRL} from "../../utils/numberUtils.js";
+import {Section} from "../Section/Section.jsx";
 
 export function ChipsSelectSection({onChange, chipsData = []}) {
 
@@ -12,20 +15,25 @@ export function ChipsSelectSection({onChange, chipsData = []}) {
     });
 
     return (
-        <SectionWrapper>
-            <h2>Fichas</h2>
+        <Section title={"Fichas"}>
             <ChipsSection>
                 {availableChips && availableChips.map(chip => {
                     const existingChipData = chipsData.find(cd => cd.chipId === chip.id);
                     const initialQuantity = existingChipData ? existingChipData.quantity : 0;
                     return (
                         <ChipSelect key={chip.id}>
-                            <h3>{capitalize(chip.color)}</h3>
-                            <NumberInput initial={initialQuantity} onChange={(value) => onChange(chip.id, value)}/>
+                            <ChipInfo>
+                                <ChipColorIndicator color={chip.colorHex} />
+                                <div>
+                                    <ChipName>{capitalize(chip.color)}</ChipName>
+                                    <ChipValue>{formatNumberToBRL(chip.value)}</ChipValue>
+                                </div>
+                            </ChipInfo>
+                            <ChipQuantityControl initial={initialQuantity} onChange={(value) => onChange(chip.id, value)}/>
                         </ChipSelect>
                     );
                 })}
             </ChipsSection>
-        </SectionWrapper>
+        </Section>
     );
 }
