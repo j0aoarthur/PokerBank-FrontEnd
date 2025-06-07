@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const ChipsSection = styled.div`
     display: flex;
     flex-direction: column;
-    gap: calc(0.75 * var(--space-4)); // space-y-3
+    gap: calc(0.75 * var(--space-4)); 
 `
 
 export const ChipSelect = styled.div`
@@ -20,12 +20,12 @@ export const ChipSelect = styled.div`
 export const ChipInfo = styled.div`
   display: flex;
   align-items: center;
-  gap: calc(0.75 * var(--space-4)); // gap-3
+  gap: calc(0.75 * var(--space-4)); 
 `;
 
 export const ChipColorIndicator = styled.div`
-  width: calc(0.75 * var(--space-4)); // w-3
-  height: calc(2 * var(--space-4));   // h-8
+  width: calc(0.75 * var(--space-4)); 
+  height: calc(2 * var(--space-4));   
   border-radius: var(--rounded-full);
   background-color: ${props => props.color || 'var(--dark-text-primary)'};
 `;

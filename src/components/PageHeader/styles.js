@@ -19,7 +19,7 @@ export const HeaderContent = styled.div`
 `;
 
 export const HeaderButton = styled.button`
-    color: var(--primary-color-dark); // Tailwind: text-[#2D3748]
+    color: var(--primary-color-dark); 
     background: none;
     border: none;
     cursor: pointer;
@@ -33,7 +33,7 @@ export const HeaderButton = styled.button`
 export const HeaderTitle = styled.h2`
   flex: 1;
   text-align: center;
-  font-size: var(--text-xl); // Tailwind: text-xl
-  font-weight: var(--font-semibold); // Tailwind: font-semibold
-  color: var(--primary-color-dark); // Tailwind: text-[#2D3748]
+  font-size: var(--text-xl); 
+  font-weight: var(--font-semibold); 
+  color: var(--primary-color-dark); 
 `;

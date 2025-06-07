@@ -11,11 +11,11 @@ export const CardItem = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: var(--panel-background-color); // bg-[#F7F9FC]
-    padding: var(--space-3); // p-3
-    border-radius: var(--rounded-lg); // rounded-lg
-    border: 1px solid var(--panel-border-color); // border border-[#E8EDF2]
-    box-shadow: var(--shadow-md-custom); // shadow-md
+    background-color: var(--panel-background-color); 
+    padding: var(--space-3); 
+    border-radius: var(--rounded-lg); 
+    border: 1px solid var(--panel-border-color); 
+    box-shadow: var(--shadow-md-custom); 
     width: 100%;
 `
 
@@ -51,7 +51,7 @@ export const PlayerNetBalance = styled.p`
 `
 
 export const ItemTextMain = styled.p`
-    color: var(--primary-color-dark); // text-[#2D3748]
+    color: var(--primary-color-dark); 
     font-weight: var(--font-medium);
 `;
 

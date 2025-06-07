@@ -27,7 +27,7 @@ export const Label = styled.label`
   font-size: var(--text-sm);
   font-weight: var(--font-medium);
   line-height: var(--leading-normal);
-  padding-bottom: var(--space-1); // pb-1
+  padding-bottom: var(--space-1); 
 `;
 
 export const SelectWrapper = styled.div`
@@ -45,10 +45,10 @@ const commonInputStyles = `
   color: var(--primary-color-dark);
   border: 1px solid var(--panel-border-color);
   background-color: var(--white-color);
-  height: calc(12 * var(--space-unit)); // h-12
-  padding: 0 var(--space-3); // px-3
+  height: calc(12 * var(--space-unit)); 
+  padding: 0 var(--space-3); 
   font-size: var(--text-base);
-  font-weight: var(--font-normal); // Assuming 400
+  font-weight: var(--font-normal); 
   line-height: var(--leading-normal);
 
   &::placeholder {
@@ -57,14 +57,14 @@ const commonInputStyles = `
 
   &:focus {
     outline: none;
-    border-color: var(--primary-color-dark); // focus:ring-[#2D3748] (border color change)
+    border-color: var(--primary-color-dark); 
 
   }
 `;
 
 export const SelectInput = styled.select`
   ${commonInputStyles}
-  appearance: none; // appearance-none
+  appearance: none; 
 
   option {
     padding: var(--space-2) var(--space-3);
@@ -84,18 +84,17 @@ export const SelectInput = styled.select`
 export const SelectArrow = styled.div`
   pointer-events: none;
   position: absolute;
-  inset-inline-end: 0; // right-0
-  inset-block-start: 0; // inset-y-0 (top)
-  inset-block-end: 0; // inset-y-0 (bottom)
+  inset-inline-end: 0; 
+  inset-block-start: 0; 
+  inset-block-end: 0; 
   display: flex;
   align-items: center;
-  padding: 0 var(--space-2); // px-2
+  padding: 0 var(--space-2); 
   color: var(--secondary-color-gray);
 `;
 
 export const NumberInputStyled = styled.input`
   ${commonInputStyles}
-    // For hiding spinners on number input
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;

@@ -1,4 +1,3 @@
-// src/pages/LoginPage/styles.js
 import styled from 'styled-components';
 
 export const LoginPageContainer = styled.div`
@@ -18,7 +17,7 @@ export const LoginSection = styled.div`
     gap: 25px;
     align-self: stretch;
     width: 100%;
-    max-width: 400px; /* Limit form width for better readability */
+    max-width: 400px;
     padding: 25px;
 `
 

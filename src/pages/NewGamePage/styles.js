@@ -20,26 +20,21 @@ export const MainContent = styled.main`
     }
 `;
 
-// Wrapper for the Ant Design DatePicker for consistent margin
 export const DatePickerWrapper = styled.div`
     margin-bottom: var(--space-6);
-    /* Antd DatePicker default height is ~32px for default size, ~40px for large.
-       The previous custom input was h-14 (56px).
-       If a specific height is crucial, it might require more specific antd overrides or sizing.
-       For now, we use size="large" which is closer to common mobile tap targets.
-    */
+    
     .ant-picker {
         width: 100%;
-        height: calc(14 * var(--space-unit)); /* Try to match h-14 from previous custom input: 56px */
+        height: calc(14 * var(--space-unit));
         border-radius: var(--rounded-xl);
-        border-color: var(--panel-border-color, #E2E8F0);
-        background-color: var(--panel-background-color, #F7F9FC);
+        border-color: var(--panel-border-color);
+        background-color: var(--panel-background-color);
     }
     .ant-picker-input > input {
         color: var(--primary-color-dark);
         font-size: var(--text-base);
         &::placeholder {
-            color: var(--secondary-color-gray, #A0AEC0);
+            color: var(--secondary-color-gray);
         }
     }
     .ant-picker-focused {
@@ -63,7 +58,7 @@ const BaseButton = styled.button`
     border: none;
     cursor: pointer;
 
-    svg { // Changed from .material-icons... to svg for react-icons
+    svg { 
         margin-right: var(--space-2);
     }
 `;
@@ -73,7 +68,7 @@ export const PrimaryButton = styled(BaseButton)`
     color: var(--white-color);
     font-size: ${props => props.$fontSize || 'var(--text-base)'};
     &:hover {
-        background-color: var(--primary-button-hover-bg, #1A202C);
+        background-color: #1A202C;
     }
 `;
 

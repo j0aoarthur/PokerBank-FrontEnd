@@ -16,14 +16,14 @@ export const QuantityButton = styled.button.attrs({
 })`
     font-size: var(--text-xl);
     font-weight: var(--font-normal);
-    height: calc(2 * var(--space-4)); // h-8
-    width: calc(2 * var(--space-4));  // w-8
+    height: calc(2 * var(--space-4)); 
+    width: calc(2 * var(--space-4));  
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: var(--rounded-full);
     background-color: var(--primary-color-dark);
-    color: var(--white-color); // Ensure text color contrasts
+    color: var(--white-color); 
     border: none;
     cursor: pointer;
     transition: background-color 0.15s, color 0.15s;
@@ -44,7 +44,7 @@ export const QuantityButton = styled.button.attrs({
 `;
 
 export const QuantityInput = styled.input`
-    width: calc(16 * var(--space-unit)); // w-16
+    width: calc(16 * var(--space-unit)); 
     border-radius: var(--rounded-lg);
     border: 1px solid var(--panel-border-color);
     background-color: var(--background-color);

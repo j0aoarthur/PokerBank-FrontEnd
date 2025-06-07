@@ -26,6 +26,6 @@ export const SectionSubtitle = styled.a`
     text-decoration: none;
     
     &:hover {
-        text-decoration: underline; // hover:underline
+        text-decoration: underline;
     }
 `

@@ -31,7 +31,7 @@ export const PageSubtitle = styled.h2`
 export const PaymentCardsContainer = styled.div`
     display: flex;
     flex-direction: column;
-    gap: var(--space-4); // space-y-4
+    gap: var(--space-4); 
 `;
 
 export const PaymentCard = styled.div`
@@ -43,8 +43,8 @@ export const PaymentCard = styled.div`
 
 export const PaymentCardInfo = styled.div`
     display: flex;
-    justify-content: space-between; // Not explicitly in HTML but implied by structure
-    align-items: flex-start; // Align items to top
+    justify-content: space-between; 
+    align-items: flex-start; 
     margin-bottom: var(--space-2);
     
     p {

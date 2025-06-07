@@ -54,7 +54,7 @@ export function AllGamesPage({ title }) {
     useTitle(title);
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [pageSize, setPageSize] = useState(10);
+    const [pageSize, setPageSize] = useState(5);
 
     const { data: apiResponse, error: errorAllGames } = useQuery({
         queryKey: ['allGames', currentPage, pageSize],
@@ -116,8 +116,6 @@ export function AllGamesPage({ title }) {
                                 pageSize={pageSize}
                                 total={totalGames}
                                 onChange={handlePageChange}
-                                showSizeChanger={true}
-                                pageSizeOptions={['5', '10', '20', '50']}
                             />
                         </PaginationWrapper>
                     )}

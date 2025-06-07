@@ -9,7 +9,7 @@ export const PageWrapper = styled.div`
 `
 
 export const GameTitleSummary = styled.div`
-  margin-bottom: var(--space-6); // Tailwind: mb-6
+  margin-bottom: var(--space-6);
 `;
 
 export const GameName = styled.h1`

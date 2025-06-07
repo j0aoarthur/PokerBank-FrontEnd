@@ -13,7 +13,7 @@ export const MainContent = styled.main`
     align-self: stretch;
     display: flex;
     flex-direction: column;
-    gap: var(--space-5); // space-y-6
+    gap: var(--space-5); 
 `;
 
 export const Card = styled.div`
@@ -36,13 +36,13 @@ export const Label = styled.label`
 
 export const InputField = styled.input`
     width: 100%;
-    border-radius: var(--rounded-md); // rounded-md
+    border-radius: var(--rounded-md); 
     border: 1px solid var(--panel-border-color);
     background-color: var(--white-color);
     color: var(--primary-color-dark);
-    padding: var(--space-2) var(--space-3); // py-2 px-3
+    padding: var(--space-2) var(--space-3); 
     font-size: var(--text-sm);
-    line-height: 1.5; // Ensure consistent height with padding
+    line-height: 1.5; 
 
     &::placeholder {
         color: var(--secondary-color-gray);
@@ -77,7 +77,7 @@ export const SubmitButton = styled.button`
     transition: background-color 0.15s;
 
     &:hover {
-        background-color: rgba(45, 55, 72, 0.9); // hover:bg-opacity-90
+        background-color: rgba(45, 55, 72, 0.9); 
     }
 `;
 
@@ -94,9 +94,9 @@ export const ItemList = styled.ul`
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 0; // space-y-2 applied by border logic
-    max-height: calc(8 * var(--space-6)); // max-h-32 (8 * 4px)
-    overflow-y: auto; // Allow scrolling if items exceed max height
+    gap: 0; 
+    max-height: calc(8 * var(--space-6)); 
+    overflow-y: auto; 
 `;
 
 export const ListItem = styled.li`

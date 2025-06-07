@@ -26,7 +26,7 @@ export const NavLink = styled.a`
         background-color: ${props => props.$active ? 'var(--nav-active-hover-bg, rgba(74, 85, 104, 0.7))' : 'var(--nav-active-bg, rgba(74, 85, 104, 0.5))'};
     }
 
-    svg { // For react-icons
+    svg { 
         font-size: 24px;
     }
 
