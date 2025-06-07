@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import {createHashRouter, RouterProvider} from "react-router-dom";
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import {Container} from "./components/Container/Container.jsx";
 import {HomePage} from "./pages/HomePage/HomePage.jsx";
 import {NewGamePage} from "./pages/NewGamePage/NewGamePage.jsx";
@@ -11,11 +11,10 @@ import {GameDetailsPage} from "./pages/GameDetailsPage/GameDetailsPage.jsx";
 import {RankingPage} from "./pages/RankingPage/RankingPage.jsx";
 import {AdminPage} from "./pages/AdminPage/AdminPage.jsx";
 import {MakePaymentPage} from "./pages/MakePaymentPage/MakePaymentPage.jsx";
-import {LoginPage} from "./pages/LoginPage/LoginPage.jsx";
 import {PlayerGameDetailsPage} from "./pages/PlayerGameDetailsPage/PlayerGameDetailsPage.jsx";
 import {AllGamesPage} from "./pages/AllGamesPage/AllGamesPage.jsx";
 
-const router = createHashRouter([
+const router = createBrowserRouter([
     {
         path: "/",
         element: <App/>,
@@ -27,10 +26,6 @@ const router = createHashRouter([
                     {
                         path:"",
                         element: <HomePage title={"Página Principal"}/>,
-                    },
-                    {
-                        path:"login",
-                        element: <LoginPage title={"Login"}/>,
                     },
                     {
                         path:"game",

@@ -1,9 +1,5 @@
 import styled from "styled-components";
 
-export const QuantityControlContainer = styled.div`
-    flex-shrink: 0;
-`;
-
 export const QuantityInputGroup = styled.div`
     display: flex;
     align-items: center;
