@@ -9,7 +9,7 @@ export function WelcomeSection({ userName }) {
 
     return (
         <div>
-            <WelcomeMessage>Boas-vindas, {userName}</WelcomeMessage>
+            <WelcomeMessage>Bem-vindo, {userName}</WelcomeMessage>
             <ActionButtonsGrid>
                 <ActionButton onClick={() => navigate("/game/")}>
                     <MdAddCircleOutline />

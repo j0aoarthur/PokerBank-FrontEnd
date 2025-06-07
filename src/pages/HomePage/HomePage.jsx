@@ -10,7 +10,7 @@ export function HomePage({title}) {
 
     return (
         <HomePageContainer>
-            <HomeHeader/>
+            <HomeHeader onSettingsClick={() => alert("Funcionalidade ainda não implementada!")}/>
             <WelcomeSection userName={"Usuário"} />
             <GameSection />
             <RankingSection/>
