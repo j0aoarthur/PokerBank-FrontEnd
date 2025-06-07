@@ -2,7 +2,7 @@
   "name": "PokerBank",
   "short_name": "PokerBank",
   "description": "Gerenciador de jogadores, fichas e jogos de poker.",
-  "start_url": "index.html",
+  "start_url": "/",
   "display": "standalone",
   "theme_color": "#FFF",
   "background_color": "#2D3748",
